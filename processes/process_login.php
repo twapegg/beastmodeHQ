@@ -22,7 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Validate input
     if (empty($email) || empty($password)) {
-        die("Email and password are required.");
+        header("Location: ../auth/login.php?error=empty_fields");
+        exit();
     }
 
     // Check if the user exists
@@ -48,10 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: ../index.php");
             exit();
         } else {
-            echo "Invalid password.";
+            // Invalid password
+            header("Location: ../auth/login.php?error=invalid_password");
+            exit();
         }
     } else {
-        echo "No account found with that email.";
+        // No account found
+        header("Location: ../auth/login.php?error=no_account");
+        exit();
     }
 
     $stmt->close();
