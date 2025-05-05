@@ -12,100 +12,166 @@
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-primary bg-opacity-25 px-4 py-3" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">BeastModeHQ</a>
+            <!-- Logo and Brand Name -->
+            <a class="navbar-brand d-flex align-items-center w-25" href="#">
+                <img src="./public/blackwhite.svg" alt="Logo" width="50" height="50" class="me-3  rounded-circle">
+                <!-- Replace with your logo path -->
+                BeastModeHQ
+            </a>
+            <!-- Navbar Toggler -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!-- Navbar Content -->
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="#">Features</a>
-                    <a class="nav-link" href="#">Pricing</a>
+                <!-- Centered Navigation Links -->
+                <div class="d-flex justify-content-lg-center justify-content-start w-100 ms-0 ms-lg-5 ms-xl-10 ">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Gallery</a>
+                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="#">Classes</a>
+                    </div>
                 </div>
-
-
+                <!-- Login and Sign Up Buttons -->
+                <div
+                    class="row w-100 d-flex justify-content-center justify-content-lg-end align-items-center gap-3 gap-lg-0">
+                    <div class="col-12 col-lg-auto">
+                        <a class="btn btn-tertiary text-light px-3 w-100" href="auth/login.php" role="button">Login</a>
+                    </div>
+                    <div class="col-12 col-lg-auto">
+                        <a class="btn btn-brand text-light px-3 w-100" href="auth/signup.php" type="button">Get
+                            Started</a>
+                    </div>
+                </div>
             </div>
-
         </div>
     </nav>
 
-    
-    <h1 class="mt-5 ms-5">Welcome back, Jose!</h1>
+
+
 
     <!-- main -->
     <main class="container mt-5">
-       
-        <div class="row justify-content-evenly">
-            <div class="col-3 bg-primary p-3">
-                <p class="text-white">Upcoming Classes</p>
-                <h3 class="text-center text-white">12</h3>
-            </div>
-            <div class="col-3 bg-primary p-3">
-                <p class="text-white">Sessions this Month</p>
-                <h3 class="text-center text-white">20</h3>
-            </div>
-            <div class="col-3 bg-primary p-3">
-                <p class="text-white">Attendance Rate</p>
-                <h3 class="text-center text-white">80%</h3>
-            </div>
-        </div>
 
-        <h2 class="mt-5">Available Classes</h2>
+        <h1 class="mt-5 mb-5">Welcome back, Jose!</h1>
 
-        <div class="row justify-content-evenly mt-3">
-            <div class="col-3 bg-primary p-3">
-                <img class="d-block mx-auto" src="../images/workout.jpg" width="250px" height="250px" alt="black man working out">
-                <p class="text-white fw-semibold fs-4">Calisthenics Training</p>
-                <p class="text-white mt-n6 fw-lighter">Mon, April 29, 2025 - 10:00 AM</p>
-
-                <div class="row justify-content-between px-1">
-                    <p class=" col-4 text-white fw-lighter">5 spots left</p>
-                    <button type="submit" class=" col-4 btn btn-secondary ms-5">Enroll</button>
+        <div class="row justify-content-between">
+            <div class="col-3">
+                <div class="card w-200 h-100 shadow-sm bg-primary text-light">
+                    <div class="card-body d-flex flex-column p-4">
+                        <h4 class="card-title ">Upcoming Classes</h4>
+                        <p class="card-text text-secondary mt-4 fs-4">3</p>
+                    </div>
                 </div>
-                
+
             </div>
-            <div class="col-3 bg-primary p-3">
-                <p class="text-white">Sessions this Month</p>
-                <h3 class="text-center text-white">20</h3>
+
+            <div class="col-3">
+                <div class="card h-100 shadow-sm bg-primary text-light">
+                    <div class="card-body d-flex flex-column p-4">
+                        <h4 class="card-title ">Sessions this Month</h4>
+                        <p class="card-text text-secondary mt-4 fs-4">12</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-3 bg-primary p-3">
-                <p class="text-white">Attendance Rate</p>
-                <h3 class="text-center text-white">80%</h3>
+            <div class="col-3">
+                <div class="card h-100 shadow-sm bg-primary text-light">
+                    <div class="card-body d-flex flex-column p-4">
+                        <h4 class="card-title">Attendance Rate</h4>
+                        <p class="card-text text-secondary mt-4 fs-4">100%</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row justify-content-evenly mt-3">
-            <div class="col-3 bg-primary p-3">
-                <p class="text-white">Upcoming Classes</p>
-                <h3 class="text-center text-white">12</h3>
-            </div>
-            <div class="col-3 bg-primary p-3">
-                <p class="text-white">Sessions this Month</p>
-                <h3 class="text-center text-white">20</h3>
-            </div>
-            <div class="col-3 bg-primary p-3">
-                <p class="text-white">Attendance Rate</p>
-                <h3 class="text-center text-white">80%</h3>
-            </div>
-        </div>
+        <h3 class="mt-5">Available Classes</h3>
 
         <div class="row justify-content-evenly mt-3">
-            <div class="col-3 bg-primary p-3">
-                <p class="text-white">Upcoming Classes</p>
-                <h3 class="text-center text-white">12</h3>
+
+            <div class="col-3">
+
+                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+
+                    <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
+                        height="150px" alt="black man working out">
+                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
+                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+
+                    <div class="card-footer d-flex justify-content-between p-0">
+                        <p class="text-white fw-lighter fs-6">
+                            <img src="../images/person.svg" alt="" width="28px" height="28px">
+                            5 spots left
+                        </p>
+                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-3 bg-primary p-3">
-                <p class="text-white">Sessions this Month</p>
-                <h3 class="text-center text-white">20</h3>
+
+            <div class="col-3">
+
+                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+
+                    <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
+                        height="150px" alt="black man working out">
+                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
+                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+
+                    <div class="card-footer d-flex justify-content-between p-0">
+                        <p class="text-white fw-lighter fs-6">
+                            <img src="../images/person.svg" alt="" width="28px" height="28px">
+                            5 spots left
+                        </p>
+                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-3 bg-primary p-3">
-                <p class="text-white">Attendance Rate</p>
-                <h3 class="text-center text-white">80%</h3>
+
+            <div class="col-3">
+
+                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+
+                    <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
+                        height="150px" alt="black man working out">
+                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
+                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+
+                    <div class="card-footer d-flex justify-content-between p-0">
+                        <p class="text-white fw-lighter fs-6">
+                            <img src="../images/person.svg" alt="" width="28px" height="28px">
+                            5 spots left
+                        </p>
+                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                    </div>
+                </div>
+
             </div>
-        </div>
+
+            <div class="col-3">
+
+                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+
+                    <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
+                        height="150px" alt="black man working out">
+                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
+                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+
+                    <div class="card-footer d-flex justify-content-between p-0">
+                        <p class="text-white fw-lighter fs-6">
+                            <img src="../images/person.svg" alt="" width="28px" height="28px">
+                            5 spots left
+                        </p>
+                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                    </div>
+                </div>
+
+            </div>
 
     </main>
 
