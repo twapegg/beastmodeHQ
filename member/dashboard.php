@@ -60,30 +60,33 @@
 
         <h1 class="mt-5 mb-5">Welcome back, Jose!</h1>
 
-        <div class="row justify-content-between">
-            <div class="col-3">
-                <div class="card w-200 h-100 shadow-sm bg-primary text-light">
-                    <div class="card-body d-flex flex-column p-4">
-                        <h4 class="card-title ">Upcoming Classes</h4>
-                        <p class="card-text text-secondary mt-4 fs-4">3</p>
+        <div class="container bg-dark rounded p-3 shadow-sm">
+            <div class="row justify-content-evenly">
+
+                <div class="col-3">
+                    <div class="card w-200 h-100 shadow-sm bg-primary text-light">
+                        <div class="card-body d-flex flex-column p-4">
+                            <h4 class="card-title ">Upcoming Classes</h4>
+                            <p class="card-text text-secondary mt-4 fs-4">3</p>
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
-
-            <div class="col-3">
-                <div class="card h-100 shadow-sm bg-primary text-light">
-                    <div class="card-body d-flex flex-column p-4">
-                        <h4 class="card-title ">Sessions this Month</h4>
-                        <p class="card-text text-secondary mt-4 fs-4">12</p>
+                <div class="col-3">
+                    <div class="card h-100 shadow-sm bg-primary text-light">
+                        <div class="card-body d-flex flex-column p-4">
+                            <h4 class="card-title ">Sessions this Month</h4>
+                            <p class="card-text text-secondary mt-4 fs-4">12</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="card h-100 shadow-sm bg-primary text-light">
-                    <div class="card-body d-flex flex-column p-4">
-                        <h4 class="card-title">Attendance Rate</h4>
-                        <p class="card-text text-secondary mt-4 fs-4">100%</p>
+                <div class="col-3">
+                    <div class="card h-100 shadow-sm bg-primary text-light">
+                        <div class="card-body d-flex flex-column p-4">
+                            <h4 class="card-title">Attendance Rate</h4>
+                            <p class="card-text text-secondary mt-4 fs-4">100%</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,83 +94,86 @@
 
         <h3 class="mt-5">Available Classes</h3>
 
-        <div class="row justify-content-evenly mt-3">
+        <div class="container bg-dark rounded p-3 shadow-sm">
+            <div class="row justify-content-evenly mt-1">
 
-            <div class="col-3">
+                <div class="col-3">
 
-                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+                    <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
 
-                    <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
-                        height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+                        <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
+                            height="150px" alt="black man working out">
+                        <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
+                        <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
 
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                        <div class="card-footer d-flex justify-content-between p-0">
+                            <p class="text-white fw-lighter fs-6">
+                                <i class="bi bi-person-fill"></i> 5/10
+                            </p>
+                            <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
+                <div class="col-3">
 
-            <div class="col-3">
+                    <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
 
-                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+                        <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
+                            height="150px" alt="black man working out">
+                        <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
+                        <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
 
-                    <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
-                        height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
-
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                        <div class="card-footer d-flex justify-content-between p-0">
+                            <p class="text-white fw-lighter fs-6">
+                                <i class="bi bi-person-fill"></i> 5/10
+                            </p>
+                            <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
+                <div class="col-3">
 
-            <div class="col-3">
+                    <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
 
-                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+                        <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
+                            height="150px" alt="black man working out">
+                        <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
+                        <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
 
-                    <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
-                        height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
-
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                        <div class="card-footer d-flex justify-content-between p-0">
+                            <p class="text-white fw-lighter fs-6">
+                                <i class="bi bi-person-fill"></i> 5/10
+                            </p>
+                            <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
+                <div class="col-3">
 
-            <div class="col-3">
+                    <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
 
-                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+                        <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
+                            height="150px" alt="black man working out">
+                        <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
+                        <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
 
-                    <img class="d-block mx-auto rounded card-img-top" src="../images/workout.jpg" width="280px"
-                        height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
-
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                        <div class="card-footer d-flex justify-content-between p-0">
+                            <p class="text-white fw-lighter fs-6">
+                                <i class="bi bi-person-fill"></i> 5/10
+                            </p>
+                            <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                        </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
+        </div>
+    </div>
 
     </main>
 

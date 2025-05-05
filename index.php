@@ -35,7 +35,7 @@
                         <a class="nav-link" href="#">Features</a>
                         <a class="nav-link" href="#">Gallery</a>
                         <a class="nav-link" href="#">Pricing</a>
-                        <a class="nav-link" href="#">Classes</a>
+                        <a class="nav-link" href="classes.php">Classes</a>
                     </div>
                 </div>
                 <!-- Login and Sign Up Buttons -->
