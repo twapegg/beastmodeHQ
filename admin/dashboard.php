@@ -12,7 +12,7 @@
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg bg-primary bg-opacity-25 px-4 py-3" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-primary bg-opacity-25 px-4 py-3 rounded" data-bs-theme="dark">
         <div class="container-fluid">
             <!-- Logo and Brand Name -->
             <a class="navbar-brand d-flex align-items-center w-25" href="#">
@@ -54,7 +54,94 @@
 
     <!-- main -->
     <main class="container mt-5">
-    
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+            <nav class="nav flex-column bg-primary p-3 h-100" style="height: 100vh;">
+                <a class="nav-link active text-light" href="#">Dashboard</a>
+                <a class="nav-link text-light" href="#">Profile</a>
+                <a class="nav-link text-light" href="#">Settings</a>
+                <a class="nav-link text-light" href="#">Logout</a>
+            </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+            <div class="row g-3">
+                <!-- Top Row: 1x2 -->
+                <div class="col-md-6">
+                <div class="card bg-primary text-light">
+                    <div class="card-body">
+                    <h5 class="card-title">Card 1</h5>
+                    <p class="card-text">Content for card 1.</p>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="card bg-primary text-light">
+                    <div class="card-body">
+                    <h5 class="card-title">Card 2</h5>
+                    <p class="card-text">Content for card 2.</p>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Middle Row: Card 3 -->
+                <div class="col-md-12">
+                <div class="card bg-primary text-light">
+                    <div class="card-body">
+                    <h5 class="card-title">Card 3</h5>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                        <div class="card bg-primary text-light">
+                            <div class="card-body">
+                            <h6 class="card-title">Subcard 3.1</h6>
+                            <p class="card-text">Content for subcard 3.1.</p>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-12">
+                        <div class="card bg-primary text-light">
+                            <div class="card-body">
+                            <h6 class="card-title">Subcard 3.2</h6>
+                            <p class="card-text">Content for subcard 3.2.</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Bottom Row: Card 4 -->
+                <div class="col-md-12">
+                <div class="card bg-primary text-light">
+                    <div class="card-body">
+                    <h5 class="card-title">Card 4</h5>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                        <div class="card bg-primary text-light">
+                            <div class="card-body">
+                            <h6 class="card-title">Subcard 4.1</h6>
+                            <p class="card-text">Content for subcard 4.1.</p>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-12">
+                        <div class="card bg-primary text-light">
+                            <div class="card-body">
+                            <h6 class="card-title">Subcard 4.2</h6>
+                            <p class="card-text">Content for subcard 4.2.</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
 
     </main>
 
