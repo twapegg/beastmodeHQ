@@ -104,8 +104,7 @@
 
                     <div class="card-footer d-flex justify-content-between p-0">
                         <p class="text-white fw-lighter fs-6">
-                            <img src="../images/person.svg" alt="" width="28px" height="28px">
-                            5 spots left
+                            <i class="bi bi-person-fill"></i> 5/10
                         </p>
                         <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
                     </div>
@@ -124,8 +123,7 @@
 
                     <div class="card-footer d-flex justify-content-between p-0">
                         <p class="text-white fw-lighter fs-6">
-                            <img src="../images/person.svg" alt="" width="28px" height="28px">
-                            5 spots left
+                            <i class="bi bi-person-fill"></i> 5/10
                         </p>
                         <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
                     </div>
@@ -144,8 +142,7 @@
 
                     <div class="card-footer d-flex justify-content-between p-0">
                         <p class="text-white fw-lighter fs-6">
-                            <img src="../images/person.svg" alt="" width="28px" height="28px">
-                            5 spots left
+                            <i class="bi bi-person-fill"></i> 5/10
                         </p>
                         <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
                     </div>
@@ -164,8 +161,7 @@
 
                     <div class="card-footer d-flex justify-content-between p-0">
                         <p class="text-white fw-lighter fs-6">
-                            <img src="../images/person.svg" alt="" width="28px" height="28px">
-                            5 spots left
+                            <i class="bi bi-person-fill"></i> 5/10
                         </p>
                         <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
                     </div>

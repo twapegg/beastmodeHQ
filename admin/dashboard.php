@@ -56,44 +56,54 @@
     <main class="container mt-5">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3">
-            <nav class="nav flex-column bg-primary p-3 h-100" style="height: 100vh;">
+            <div class="col-md-3 rounded bg-primary">
+            <nav class="nav flex-column p-3 h-100" style="height: 100vh;">
                 <a class="nav-link active text-light" href="#">Dashboard</a>
-                <a class="nav-link text-light" href="#">Profile</a>
-                <a class="nav-link text-light" href="#">Settings</a>
-                <a class="nav-link text-light" href="#">Logout</a>
+                <a class="nav-link text-light" href="#">Class Schedule</a>
+                <a class="nav-link text-light" href="#">Gym Sessions</a>
+                <a class="nav-link text-light" href="#">Member Management</a>
+                <a class="nav-link text-light" href="#">Reports</a>
             </nav>
             </div>
 
             <!-- Main Content -->
             <div class="col-md-9">
             <div class="row g-3">
-                <!-- Top Row: 1x2 -->
-                <div class="col-md-6">
-                <div class="card bg-primary text-light">
-                    <div class="card-body">
-                    <h5 class="card-title">Card 1</h5>
-                    <p class="card-text">Content for card 1.</p>
+                <!-- Top Row: 1x3 -->
+                <div class="col-md-4">
+                    <div class="card bg-primary text-light">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Classes</h5>
+                            <p class="card-text text-secondary fs-4">10</p>
+                        </div>
                     </div>
                 </div>
-                </div>
-                <div class="col-md-6">
-                <div class="card bg-primary text-light">
-                    <div class="card-body">
-                    <h5 class="card-title">Card 2</h5>
-                    <p class="card-text">Content for card 2.</p>
+                <div class="col-md-4">
+                    <div class="card bg-primary text-light">
+                        <div class="card-body">
+                            <h5 class="card-title">Active Classes</h5>
+                            <p class="card-text text-secondary fs-4">5</p>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="card bg-primary text-light">
+                        <div class="card-body">
+                            <h5 class="card-title">Today's Bookings</h5>
+                            <p class="card-text text-secondary fs-4">2</p>
+                        </div>
+                    </div>
                 </div>
+            
 
                 <!-- Middle Row: Card 3 -->
                 <div class="col-md-12">
                 <div class="card bg-primary text-light">
                     <div class="card-body">
-                    <h5 class="card-title">Card 3</h5>
+                    <h5 class="card-title">Recent Activities</h5>
                     <div class="row g-3">
                         <div class="col-md-12">
-                        <div class="card bg-primary text-light">
+                        <div class="card bg-primary shadow-sm text-light">
                             <div class="card-body">
                             <h6 class="card-title">Subcard 3.1</h6>
                             <p class="card-text">Content for subcard 3.1.</p>
@@ -101,7 +111,7 @@
                         </div>
                         </div>
                         <div class="col-md-12">
-                        <div class="card bg-primary text-light">
+                        <div class="card bg-primary shadow-sm text-light">
                             <div class="card-body">
                             <h6 class="card-title">Subcard 3.2</h6>
                             <p class="card-text">Content for subcard 3.2.</p>
@@ -117,10 +127,10 @@
                 <div class="col-md-12">
                 <div class="card bg-primary text-light">
                     <div class="card-body">
-                    <h5 class="card-title">Card 4</h5>
+                    <h5 class="card-title">Today's Schedule</h5>
                     <div class="row g-3">
                         <div class="col-md-12">
-                        <div class="card bg-primary text-light">
+                        <div class="card bg-primary shadow-sm text-light">
                             <div class="card-body">
                             <h6 class="card-title">Subcard 4.1</h6>
                             <p class="card-text">Content for subcard 4.1.</p>
@@ -128,7 +138,7 @@
                         </div>
                         </div>
                         <div class="col-md-12">
-                        <div class="card bg-primary text-light">
+                        <div class="card bg-primary shadow-sm text-light">
                             <div class="card-body">
                             <h6 class="card-title">Subcard 4.2</h6>
                             <p class="card-text">Content for subcard 4.2.</p>
