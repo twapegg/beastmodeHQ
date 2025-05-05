@@ -76,6 +76,11 @@
                     <option value="2">Cardio</option>
                     <option value="3">Flexibility</option>
                 </select>
+                <select class="form-select w-auto me-2 text-light" aria-label="Filter by availability">
+                    <option selected>Filter by Availability</option>
+                    <option value="1">Available</option>
+                    <option value="2">Full</option>
+                </select>
                 <select class="form-select w-auto text-light" aria-label="Sort by date">
                     <option selected>Sort by Date</option>
                     <option value="1">Upcoming</option>
@@ -90,7 +95,7 @@
 
                 <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
 
-                    <img class="d-block mx-auto rounded card-img-top" src="images/workout.jpg" width="280px"
+                    <img class="d-block mx-auto rounded card-img-top" src="images/calisthenics.jpg" width="280px"
                         height="150px" alt="black man working out">
                     <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
                     <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
@@ -109,9 +114,27 @@
 
                 <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
 
-                    <img class="d-block mx-auto rounded card-img-top" src="images/workout.jpg" width="280px"
+                    <img class="d-block mx-auto rounded card-img-top" src="images/pilates.png   " width="280px"
                         height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
+                    <h5 class="text-white fw-semibold text-start mt-2">Pilates</h5>
+                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+
+                    <div class="card-footer d-flex justify-content-between p-0">
+                        <p class="text-white fw-lighter fs-6">
+                            <i class="bi bi-person-fill"></i> 5/10
+                        </p>
+                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-3">
+
+                <div class="card h-100 bg-primary text-light p-3 pb-3 shadow-sm">
+
+                    <img class="d-block mx-auto rounded card-img-top" src="images/circuit.png" height="150px" alt="black man working out">
+                    <h5 class="text-white fw-semibold text-start mt-2">Circuit Training</h5>
                     <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
 
                     <div class="card-footer d-flex justify-content-between p-0">
@@ -128,9 +151,31 @@
 
                 <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
 
-                    <img class="d-block mx-auto rounded card-img-top" src="images/workout.jpg" width="280px"
+                    <img class="d-block mx-auto rounded card-img-top" src="images/weight.png" width="280px"
                         height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
+                    <h5 class="text-white fw-semibold text-start mt-2">Weight Training</h5>
+                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+
+                    <div class="card-footer d-flex justify-content-between p-0">
+                        <p class="text-white fw-lighter fs-6">
+                            <i class="bi bi-person-fill"></i> 5/10
+                        </p>
+                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-evenly mt-4">
+
+            <div class="col-3">
+
+                <div class="card h-100 bg-primary text-light p-3 pb-3 shadow-sm">
+
+                    <img class="d-block mx-auto rounded card-img-top" src="images/hiit.png" width="280px"
+                        height="150px" alt="black man working out">
+                    <h5 class="text-white fw-semibold text-start mt-2">HIIT Training</h5>
                     <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
 
                     <div class="card-footer d-flex justify-content-between p-0">
@@ -147,9 +192,47 @@
 
                 <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
 
-                    <img class="d-block mx-auto rounded card-img-top" src="images/workout.jpg" width="280px"
+                    <img class="d-block mx-auto rounded card-img-top" src="images/zumba.png" width="280px"
                         height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
+                    <h5 class="text-white fw-semibold text-start mt-2">Zumba</h5>
+                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+
+                    <div class="card-footer d-flex justify-content-between p-0">
+                        <p class="text-white fw-lighter fs-6">
+                            <i class="bi bi-person-fill"></i> 5/10
+                        </p>
+                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-3">
+
+                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+
+                    <img class="d-block mx-auto rounded card-img-top" src="images/cardio.png" width="280px"
+                        height="150px" alt="black man working out">
+                    <h5 class="text-white fw-semibold text-start mt-2">Cardio Training</h5>
+                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+
+                    <div class="card-footer d-flex justify-content-between p-0">
+                        <p class="text-white fw-lighter fs-6">
+                            <i class="bi bi-person-fill"></i> 5/10
+                        </p>
+                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-3">
+
+                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+
+                    <img class="d-block mx-auto rounded card-img-top" src="images/yoga.png" width="280px"
+                        height="150px" alt="black man working out">
+                    <h5 class="text-white fw-semibold text-start mt-2">Yoga</h5>
                     <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
 
                     <div class="card-footer d-flex justify-content-between p-0">
