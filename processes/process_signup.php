@@ -19,7 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     $date_of_birth = trim($_POST['date_of_birth']);
-    $role = trim($_POST['role']); // Defaults to 'member'
 
     // Validate input
     if (empty($name) || empty($email) || empty($password)) {
@@ -30,14 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Insert user into the database
-    $sql = "INSERT INTO users (name, email, password_hash, date_of_birth, role) 
-            VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO users (name, email, password_hash, date_of_birth) 
+            VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $name, $email, $hashed_password, $date_of_birth, $role);
+    $stmt->bind_param("ssss", $name, $email, $hashed_password, $date_of_birth);
 
     if ($stmt->execute()) {
-        // Redirect to login page after successful signup
-        header("Location: ../auth/login.php");
+        // Redirect to signup page with a success message
+        header("Location: ../auth/signup.php?success=1");
         exit();
     } else {
         echo "Error: " . $stmt->error;

@@ -12,6 +12,10 @@ $spacers: (
   3: 1rem,
   4: 1.5rem,
   5: 3rem,
+  6: 4rem,
+  7: 5rem,
+  8: 6rem,
+  9: 8rem,
   10: 10rem,
   12: 12rem,
   15: 15rem,
@@ -81,4 +85,10 @@ body {
   .navbar {
     background-color: rgba(13, 110, 253, 1); /* 100% opacity */
   }
+}
+
+/* Change the color of the calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Inverts the color to make it white */
+  cursor: pointer; /* Ensures the cursor changes to a pointer */
 }
