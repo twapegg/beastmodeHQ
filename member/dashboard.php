@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles.css">
@@ -65,11 +66,13 @@
 
             <div class="col-4">
                     <div class="row justify-content-center">
-                    <div class="card col-2  bg-white white rounded-0 rounded-start"></div>     
+                    <div class="card col-3  bg-white white rounded-0 rounded-start">
+                        <i class="bi bi-calendar-event text-secondary-emphasis display-3 mt-4 ms-2"></i>
+                    </div>     
                     <div class="card col-8 h-100 rounded-0 rounded-end bg-primary text-light">
                         <div class="card-body d-flex flex-column p-4">
                             <h5 class="card-title ">Upcoming Classes</h5>
-                            <p class="card-text text-secondary mt-4 fs-4">3</p>
+                            <p class="card-text text-secondary mt-4 fs-3">3</p>
                         </div>
                     </div>
                     </div>
@@ -78,11 +81,13 @@
 
                 <div class="col-4">
                     <div class="row justify-content-center">
-                    <div class="card col-2  bg-white white rounded-0 rounded-start"></div>     
+                    <div class="card col-3  bg-white white rounded-0 rounded-start">
+                        <i class="bi bi-calendar3 text-secondary-emphasis display-3 mt-4 ms-2"></i>
+                    </div>     
                     <div class="card col-8 h-100 rounded-0 rounded-end bg-primary text-light">
                         <div class="card-body d-flex flex-column p-4">
                             <h5 class="card-title ">Sessions this Month</h5>
-                            <p class="card-text text-secondary mt-4 fs-4">12</p>
+                            <p class="card-text text-secondary mt-4 fs-3">12</p>
                         </div>
                     </div>
                     </div>
@@ -91,13 +96,13 @@
 
                 <div class="col-4">
                     <div class="row justify-content-center">
-                    <div class="card col-2  bg-white white rounded-0 rounded-start">
-                        <i class="bi bi-journal-check" style="color:black"></i>
+                    <div class="card col-3  bg-white white rounded-0 rounded-start">
+                        <i class="bi bi-graph-up text-secondary-emphasis display-3 mt-4 ms-2"></i>
                     </div>     
                     <div class="card col-8 h-100 rounded-0 rounded-end bg-primary text-light">
                         <div class="card-body d-flex flex-column p-4">
                             <h5 class="card-title ">Attendance Rate</h5>
-                            <p class="card-text text-secondary mt-4 fs-4">100%</p>
+                            <p class="card-text text-secondary mt-4 fs-3">100%</p>
                         </div>
                     </div>
                     </div>
@@ -110,6 +115,32 @@
         <h3 class="mt-5">Available Classes</h3>
 
         <div class="container bg-dark rounded p-3 shadow-sm">
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <form class="d-flex align-items-center">
+                        <i class="bi bi-search"></i>
+                        <input class="form-control me-2 ms-2 text-white" type="search" placeholder="Search classes..." aria-label="Search">
+                        <button class="btn btn-secondary" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-md-end justify-content-start mt-3 mt-md-0">
+                        <select class="form-select w-auto me-2 text-light" aria-label="Filter by category">
+                            <option selected>Filter by Category</option>
+                            <option value="1">Strength</option>
+                            <option value="2">Cardio</option>
+                            <option value="3">Flexibility</option>
+                        </select>
+                        <select class="form-select w-auto text-light" aria-label="Sort by date">
+                            <option selected>Sort by Date</option>
+                            <option value="1">Upcoming</option>
+                            <option value="2">Past</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
             <div class="row justify-content-evenly mt-1">
 
             <div class="col-3">
@@ -123,7 +154,7 @@
 
                 <div class="card-footer d-flex justify-content-between p-0">
                     <p class="text-white fw-lighter fs-6">
-                        <i class="bi bi-person-fill"></i> 5/10
+                        <i class="bi bi-person-fill display-6";"></i> 5/10
                     </p>
                     <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
                 </div>
