@@ -72,6 +72,7 @@ session_start(); // Start the session
 
     <!-- main -->
     <main class="mt-5">
+        <!-- Hero Section -->
         <section class="hero section">
             <div class="container">
                 <div class="row">
@@ -89,6 +90,7 @@ session_start(); // Start the session
                 </div>
             </div>
         </section>
+        <!-- Carousel Section -->
         <section class="carousel-section section container mt-10">
             <h1 class="text-center mb-5">Our Facilities ⚡</h1>
             <div id="carouselExample" class="carousel slide custom-carousel">
@@ -126,6 +128,7 @@ session_start(); // Start the session
                 </button>
             </div>
         </section>
+        <!-- Features Section -->
         <section class="features section container mt-10">
             <h1 class="text-center mb-5 text-light">Get the Full Gym Experience</h1>
             <div class="row text-center">
@@ -186,6 +189,58 @@ session_start(); // Start the session
                             <h5 class="card-title text-light mt-3">Certified Trainers</h5>
                             <p class="card-text text-secondary">Train with the best in the industry to achieve your
                                 fitness goals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Pricing Section -->
+        <section class="pricing section container mt-10">
+            <h1 class="text-center mb-5 text-light">Affordable Membership Plans</h1>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm bg-dark text-light">
+                        <div class="card-body d-flex flex-column p-4">
+                            <h5 class="card-title mt-3">Weekly Membership</h5>
+                            <p class="card-text text-secondary">Perfect for short-term commitments.</p>
+                            <h2 class="text-info">₱499/week</h2>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Access to gym equipment</li>
+                                <li>1 fitness class per week</li>
+                                <li>Locker room access</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary mt-auto">Choose Plan</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm bg-dark text-light">
+                        <div class="card-body d-flex flex-column p-4">
+                            <h5 class="card-title mt-3">Monthly Membership</h5>
+                            <p class="card-text text-secondary">Ideal for regular gym-goers.</p>
+                            <h2 class="text-success">₱1,499/month</h2>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Unlimited gym access</li>
+                                <li>3 fitness classes per week</li>
+                                <li>Free nutrition counseling</li>
+                            </ul>
+                            <a href="#" class="btn btn-success mt-auto">Choose Plan</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm bg-dark text-light">
+                        <div class="card-body d-flex flex-column p-4">
+                            <h5 class="card-title mt-3">Yearly Membership</h5>
+                            <p class="card-text text-secondary">Best value for long-term commitment.</p>
+                            <h2 class="text-warning">$₱14,999/year</h2>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Unlimited gym access</li>
+                                <li>Unlimited fitness classes</li>
+                                <li>Access to spa services</li>
+                                <li>Personal trainer sessions</li>
+                            </ul>
+                            <a href="#" class="btn btn-warning mt-auto">Choose Plan</a>
                         </div>
                     </div>
                 </div>
