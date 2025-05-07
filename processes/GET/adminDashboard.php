@@ -49,6 +49,7 @@ $queryPopularClass = "
         FROM class_enrollments
         INNER JOIN class_sessions ON class_enrollments.class_session_id = class_sessions.id
         INNER JOIN classes ON class_sessions.class_id = classes.id
+        WHERE class_enrollments.status = 'enrolled'
         GROUP BY classes.id
         ORDER BY total_enrollments DESC
         LIMIT 1";
