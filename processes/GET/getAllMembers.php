@@ -13,6 +13,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Set expired status for memberships that are past end date
+$sql = "UPDATE memberships SET status = 'expired' WHERE end_date < NOW() AND status != 'expired'";
+$conn->query($sql);
+
+// Set active status for memberships that are within 7 days of expiration
+$sql = "UPDATE memberships SET status = 'active' WHERE end_date >= NOW() AND status != 'active' AND status != 'canceled' AND status != 'pending'";
+$conn->query($sql);
+
 // Fetch memberships with user details
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 if (!empty($search)) {

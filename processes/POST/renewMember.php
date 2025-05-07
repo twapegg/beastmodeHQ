@@ -20,6 +20,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Set expired status for memberships that are past end date
+$sql = "UPDATE memberships SET status = 'expired' WHERE end_date < NOW() AND status != 'expired'";
+$conn->query($sql);
+
+// Set active status for memberships that are within 7 days of expiration
+$sql = "UPDATE memberships SET status = 'active' WHERE end_date >= NOW() AND end_date <= DATE_ADD(NOW(), INTERVAL 7 DAY) AND status != 'active'";
+$conn->query($sql);
+
 // Handle renew request
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['membership_id'])) {
     $membershipId = intval($_POST['membership_id']);

@@ -269,14 +269,22 @@ include "../processes/GET/getEnrolledUsers.php";
                                 if (!empty($enrolledUsers)) {
                                     echo "<div class='list-group'>";
                                     foreach ($enrolledUsers as $index => $user) {
+                                        // Determine badge color and button text based on status
+                                        $badgeColor = $user['status'] === 'enrolled' ? 'bg-success' : 'bg-danger';
+                                        $badgeText = ucfirst($user['status']); // Capitalize the status text
+                                        $buttonText = $user['status'] === 'enrolled' ? 'Cancel' : 'Re-enroll';
+                                        $buttonClass = $user['status'] === 'enrolled' ? 'btn-danger' : 'btn-light';
+                                        $actionScript = $user['status'] === 'enrolled' ? '../processes/POST/cancelEnrollment.php' : '../processes/POST/reEnrollMember.php';
+
                                         echo "<div class='list-group-item bg-dark text-light d-flex justify-content-between align-items-center'>";
                                         echo "<div>";
                                         echo "<strong>" . ($index + 1) . ". " . htmlspecialchars($user['user_name']) . "</strong><br>";
                                         echo "<small class='text-secondary'>" . htmlspecialchars($user['user_email']) . "</small>";
                                         echo "</div>";
-                                        echo "<form action='../processes/POST/removeEnrollment.php' method='POST' class='d-inline'>";
+                                        echo "<span class='badge $badgeColor'>$badgeText</span>";
+                                        echo "<form action='$actionScript' method='POST' class='d-inline'>";
                                         echo "<input type='hidden' name='enrollment_id' value='" . $user['enrollment_id'] . "'>";
-                                        echo "<button type='submit' class='btn btn-sm btn-danger'>Remove</button>";
+                                        echo "<button type='submit' class='btn btn-sm $buttonClass'>$buttonText</button>";
                                         echo "</form>";
                                         echo "</div>";
                                     }
@@ -284,7 +292,6 @@ include "../processes/GET/getEnrolledUsers.php";
                                 } else {
                                     echo "<p class='text-secondary'>No members enrolled in this session.</p>";
                                 }
-
                                 echo "</div>";
                                 echo "</div>";
                             }

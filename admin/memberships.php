@@ -129,7 +129,7 @@ include "../processes/GET/getAllMembers.php";
                             <div class="mb-3">
                                 <label for="membershipType" class="form-label">Membership Type</label>
                                 <select class="form-select bg-dark text-light border-secondary" id="membershipType" name="membership_type" required>
-                                    <option value="daily">Weekly</option>
+                                    <option value="weekly">Weekly</option>
                                     <option value="monthly">Monthly</option>
                                     <option value="yearly">Yearly</option>
                                 </select>
