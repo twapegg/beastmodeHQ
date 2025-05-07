@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $enrollment_id = $_POST['enrollment_id'];
 
-    // Delete the enrollment record
+    // Cancel the enrollment record
     $query = "UPDATE class_enrollments SET status='canceled' WHERE id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $enrollment_id);
