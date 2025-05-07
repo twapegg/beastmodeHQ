@@ -41,7 +41,7 @@ session_start(); // Start the session
                         <a class="nav-link" href="#">Features</a>
                         <a class="nav-link" href="#">Gallery</a>
                         <a class="nav-link" href="#">Pricing</a>
-                        <a class="nav-link" href="#">Classes</a>
+                        <a class="nav-link" href="classes.php">Classes</a>
                     </div>
                 </div>
                 <!-- User Info or Login/Sign Up Buttons -->
