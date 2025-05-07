@@ -30,12 +30,19 @@ $display-font-sizes: (
   6: 1.25rem,
 );
 
+$form-select-indicator-color: #ffffff; // Change the arrow color to white
+
 $theme-colors: (
   "primary": $primary,
   "secondary": $secondary,
   "brand": $brand,
   "tertiary": $tertiary,
   "light": #ffffff,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "success": #28a745,
+  "info": #17a2b8,
+  "purple": #6f42c1,
 );
 
 // Import Bootstrap from node_modules
@@ -89,6 +96,12 @@ body {
 
 /* Change the color of the calendar icon */
 input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Inverts the color to make it white */
+  cursor: pointer; /* Ensures the cursor changes to a pointer */
+}
+
+/* Hide the default clock icon */
+input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1); /* Inverts the color to make it white */
   cursor: pointer; /* Ensures the cursor changes to a pointer */
 }

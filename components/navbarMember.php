@@ -28,8 +28,8 @@
                 class="row w-100 d-flex justify-content-center justify-content-lg-end align-items-center gap-3 gap-lg-0">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <div class="col-12 col-lg-auto">
-                        <span class="text-light">Welcome,
-                            <strong><?php echo htmlspecialchars($_SESSION['user_name']); ?></strong></span>
+                        <span class="text-light">
+                            <strong><?php echo htmlspecialchars(ucwords(strtolower($_SESSION['user_name']))); ?></strong>
                     </div>
                     <div class="col-12 col-lg-auto">
                         <a class="btn btn-danger text-light px-3 w-100" href="auth/logout.php" role="button">Logout</a>

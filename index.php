@@ -53,7 +53,7 @@ session_start(); // Start the session
                                 <strong><?php echo htmlspecialchars(ucwords(strtolower($_SESSION['user_name']))); ?></strong>
                         </div>
                         <div class="col-12 col-lg-auto">
-                            <a class="btn btn-danger text-light px-3 w-100" href="auth/logout.php" role="button">Logout</a>
+                            <a class="btn btn-danger text-light px-3 w-100" href="./processes/process_logout.php" role="button">Logout</a>
                         </div>
                     <?php else: ?>
                         <div class="col-12 col-lg-auto">
@@ -195,7 +195,7 @@ session_start(); // Start the session
 
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
-        </script>
+    </script>
 </body>
 
 </html>
