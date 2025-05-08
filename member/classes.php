@@ -32,8 +32,25 @@ $classSessions = getUserClasses($userId);
 
     <?php include "../components/navbarMember.php" ?>
 
+
     <main class="container mt-10">
         <h1 class="mb-4">My Upcoming Classes</h1>
+
+        <!-- Alert messages -->
+        <?php if (isset($_GET['success'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo htmlspecialchars($_GET['success']); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo htmlspecialchars($_GET['error']); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
 
         <?php if (!empty($classSessions)): ?>
             <div class="row">
@@ -41,19 +58,27 @@ $classSessions = getUserClasses($userId);
                     <div class="col-md-4 mb-4">
 
                         <div class="card bg-dark text-light">
-                            <div class="card-header bg-info text-light">
-                                <h5 class="mb-0"><?php echo htmlspecialchars($session['class_name']); ?></h5>
-                            </div>
+
                             <div class="card-body">
-                                <img src="<?php echo htmlspecialchars($session['image_url'] ?? '../images/pilates.png'); ?>"
-                                    class="card-img-top my-3" style="height:250px; object-fit:cover" alt="<?php echo htmlspecialchars($session['class_name']); ?>">
+                                <img src="<?php echo htmlspecialchars($session['class_image'] ?? '../public/blackwhite.svg'); ?>"
+                                    class="card-img-top my-3" style="height:250px; object-fit:cover"
+                                    alt="<?php echo htmlspecialchars($session['class_name']); ?>">
+                                <h5 class="card-title fs-3"><?php echo htmlspecialchars($session['class_name']); ?></h5>
+                                <p class="card-text text-secondary">
+                                    <?php echo htmlspecialchars($session['class_description']); ?>
+                                </p>
+
                                 <div class="d-flex align-items-center gap-2">
                                     <h6 class="text-secondary">Date:</h6>
-                                    <h6><strong><?php echo htmlspecialchars(date("F j, Y", strtotime($session['session_date']))); ?></strong></h6>
+                                    <h6><strong><?php echo htmlspecialchars(date("F j, Y", strtotime($session['session_date']))); ?></strong>
+                                    </h6>
                                 </div>
                                 <div class="d-flex align-items-center gap-2">
                                     <h6 class="text-secondary">Time:</h6>
-                                    <h6><strong><?php echo htmlspecialchars(date("g:i A", strtotime($session['start_time']))); ?> - <?php echo htmlspecialchars(date("g:i A", strtotime($session['end_time']))); ?></strong></h6>
+                                    <h6><strong><?php echo htmlspecialchars(date("g:i A", strtotime($session['start_time']))); ?>
+                                            -
+                                            <?php echo htmlspecialchars(date("g:i A", strtotime($session['end_time']))); ?></strong>
+                                    </h6>
 
                                 </div>
                                 <div class="d-flex align-items-center gap-2">
@@ -67,8 +92,12 @@ $classSessions = getUserClasses($userId);
                                 <!-- Cancel Enrollment Button -->
                                 <?php if ($session['status'] === 'enrolled'): ?>
                                     <form method="POST" action="../processes/POST/cancelUserSessionEnrollment.php" class="mt-3">
-                                        <input type="hidden" name="session_id" value="<?php echo htmlspecialchars($session['session_id']); ?>">
-                                        <button type="submit" class="btn btn-danger w-100">Cancel Enrollment</button>
+                                        <input type="hidden" name="session_id"
+                                            value="<?php echo htmlspecialchars($session['session_id']); ?>">
+                                        <button type="submit" class="btn btn-danger w-100"
+                                            onclick="return confirm('Are you sure you want to cancel this class? This action cannot be undone.');">
+                                            Cancel Enrollment
+                                        </button>
                                     </form>
                                 <?php endif; ?>
 
@@ -85,7 +114,8 @@ $classSessions = getUserClasses($userId);
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

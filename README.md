@@ -1,6 +1,6 @@
 # BeastModeHQ - A gym website
 
-## Create the database here:
+## Replicate the database here:
 
 CREATE database beastmodehq;
 

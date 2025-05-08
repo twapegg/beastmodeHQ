@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 $servername = "localhost";
 $username = "root";
@@ -31,13 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updateStmt->bind_param("ii", $membershipId, $userId);
         $updateStmt->execute();
 
-        echo "<script>
-                if (confirm('Membership applied successfully! Do you want to view your membership details?')) {
-                    window.location.href = 'membership.php?success=Membership applied successfully!';
-                } else {
-                    window.location.href = 'apply.php';
-                }
-              </script>";
+        // Redirect to the membership page with success message
+        header("Location: ../member/membership.php?success=Membership application submitted successfully. Please wait for approval.");
+
         exit();
     } else {
         $error = "Failed to apply for membership. Please try again.";

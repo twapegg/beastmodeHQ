@@ -16,6 +16,8 @@ function getUserClasses($userId) {
         SELECT 
             cs.id AS session_id,
             c.name AS class_name,
+            c.description AS class_description,
+            c.image_url AS class_image,
             cs.session_date,
             cs.start_time,
             cs.end_time,

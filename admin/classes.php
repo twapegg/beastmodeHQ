@@ -59,7 +59,8 @@ include "../processes/GET/getAllClasses.php";
                                 <strong><?php echo htmlspecialchars(ucwords(strtolower($_SESSION['user_name']))); ?></strong>
                         </div>
                         <div class="col-12 col-lg-auto">
-                            <a class="btn btn-danger text-light px-3 w-100" href="../processes/process_logout.php" role="button">Logout</a>
+                            <a class="btn btn-danger text-light px-3 w-100" href="../processes/process_logout.php"
+                                role="button">Logout</a>
                         </div>
                     <?php else: ?>
                         <div class="col-12 col-lg-auto">
@@ -97,36 +98,49 @@ include "../processes/GET/getAllClasses.php";
         <div class="w-100 d-flex justify-content-between align-items-center mb-4">
             <!-- Search Form -->
             <form method="GET" action="classes.php" class="mb-4 w-50 d-flex gap-2">
-                <input type="text" class="form-control bg-dark text-light border-secondary rounded-3" name="search" placeholder="Search by class name" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                <input type="text" class="form-control bg-dark text-light border-secondary rounded-3" name="search"
+                    placeholder="Search by class name"
+                    value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                 <button class="btn btn-light rounded-3" type="submit">Search</button>
                 <a href="classes.php" class="btn btn-secondary rounded-3">Clear</a>
             </form>
             <!-- Button to trigger modal -->
-            <button type="button" class="btn btn-brand mb-4 text-light" data-bs-toggle="modal" data-bs-target="#addClassModal">
+            <button type="button" class="btn btn-brand mb-4 text-light" data-bs-toggle="modal"
+                data-bs-target="#addClassModal">
                 Add New Class
             </button>
         </div>
 
         <!-- Add Class Modal -->
-        <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content bg-dark text-light">
                     <div class="modal-header bg-primary text-light">
                         <h5 class="modal-title text-light" id="addClassModalLabel">Add New Class</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="../processes/POST/addClass.php" method="POST">
+                        <form action="../processes/POST/addClass.php" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="className" class="form-label">Class Name</label>
-                                <input type="text" class="form-control bg-dark text-light border-secondary" id="className" name="name" required>
+                                <input type="text" class="form-control bg-dark text-light border-secondary"
+                                    id="className" name="name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="classDescription" class="form-label">Description</label>
-                                <textarea class="form-control bg-dark text-light border-secondary" id="classDescription" name="description" rows="3"></textarea>
+                                <textarea class="form-control bg-dark text-light border-secondary" id="classDescription"
+                                    name="description" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="classImage" class="form-label">Class Image</label>
+                                <input type="file" class="form-control bg-dark text-light border-secondary"
+                                    id="classImage" name="image" accept="image/*" required>
                             </div>
                             <div class="modal-footer border-secondary">
-                                <button type="button" class="btn btn-secondary text-light" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary text-light"
+                                    data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-success text-light">Add Class</button>
                             </div>
                         </form>
@@ -164,9 +178,11 @@ include "../processes/GET/getAllClasses.php";
                                     <td>
                                         <div class="d-flex gap-2" role="group">
                                             <!-- Edit Button -->
-                                            <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#editClassModal-<?php echo $class['id']; ?>">Edit</button>
+                                            <button class="btn btn-sm btn-light" data-bs-toggle="modal"
+                                                data-bs-target="#editClassModal-<?php echo $class['id']; ?>">Edit</button>
                                             <!-- Delete Button -->
-                                            <form action="../processes/POST/deleteClass.php" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this class?');">
+                                            <form action="../processes/POST/deleteClass.php" method="POST" class="d-inline"
+                                                onsubmit="return confirm('Are you sure you want to delete this class?');">
                                                 <input type="hidden" name="class_id" value="<?php echo $class['id']; ?>">
                                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                             </form>
@@ -175,27 +191,51 @@ include "../processes/GET/getAllClasses.php";
                                 </tr>
 
                                 <!-- Edit Class Modal -->
-                                <div class="modal fade" id="editClassModal-<?php echo $class['id']; ?>" tabindex="-1" aria-labelledby="editClassModalLabel-<?php echo $class['id']; ?>" aria-hidden="true">
+                                <div class="modal fade" id="editClassModal-<?php echo $class['id']; ?>" tabindex="-1"
+                                    aria-labelledby="editClassModalLabel-<?php echo $class['id']; ?>" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content bg-dark text-light">
                                             <div class="modal-header bg-primary text-light">
-                                                <h5 class="modal-title" id="editClassModalLabel-<?php echo $class['id']; ?>">Edit Class</h5>
-                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <h5 class="modal-title" id="editClassModalLabel-<?php echo $class['id']; ?>">
+                                                    Edit Class</h5>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="../processes/POST/editClass.php" method="POST">
+                                                <form action="../processes/POST/editClass.php" method="POST"
+                                                    enctype="multipart/form-data">
                                                     <input type="hidden" name="class_id" value="<?php echo $class['id']; ?>">
                                                     <div class="mb-3">
-                                                        <label for="editClassName-<?php echo $class['id']; ?>" class="form-label">Class Name</label>
-                                                        <input type="text" class="form-control bg-dark text-light border-secondary" id="editClassName-<?php echo $class['id']; ?>" name="name" value="<?php echo htmlspecialchars($class['name']); ?>" required>
+                                                        <label for="editClassName-<?php echo $class['id']; ?>"
+                                                            class="form-label">Class Name</label>
+                                                        <input type="text"
+                                                            class="form-control bg-dark text-light border-secondary"
+                                                            id="editClassName-<?php echo $class['id']; ?>" name="name"
+                                                            value="<?php echo htmlspecialchars($class['name']); ?>" required>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="editClassDescription-<?php echo $class['id']; ?>" class="form-label">Description</label>
-                                                        <textarea class="form-control bg-dark text-light border-secondary" id="editClassDescription-<?php echo $class['id']; ?>" name="description" rows="3"><?php echo htmlspecialchars($class['description']); ?></textarea>
+                                                        <label for="editClassDescription-<?php echo $class['id']; ?>"
+                                                            class="form-label">Description</label>
+                                                        <textarea class="form-control bg-dark text-light border-secondary"
+                                                            id="editClassDescription-<?php echo $class['id']; ?>"
+                                                            name="description"
+                                                            rows="3"><?php echo htmlspecialchars($class['description']); ?></textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="editClassImage-<?php echo $class['id']; ?>"
+                                                            class="form-label">Class Image</label>
+                                                        <input type="file"
+                                                            class="form-control bg-dark text-light border-secondary"
+                                                            id="editClassImage-<?php echo $class['id']; ?>" name="image"
+                                                            accept="image/*">
+                                                        <small class="text-secondary">Leave blank to keep the current
+                                                            image.</small>
                                                     </div>
                                                     <div class="modal-footer border-secondary">
-                                                        <button type="button" class="btn btn-secondary text-light" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-success text-light">Save Changes</button>
+                                                        <button type="button" class="btn btn-secondary text-light"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-success text-light">Save
+                                                            Changes</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -215,7 +255,8 @@ include "../processes/GET/getAllClasses.php";
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
