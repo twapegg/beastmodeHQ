@@ -44,7 +44,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body class="text-light">
 
-    <?php include "../components/navbarMember.php" ?>
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg bg-dark bg-gradient px-4 py-3" data-bs-theme="dark">
+        <div class="container-fluid">
+            <!-- Logo and Brand Name -->
+            <a class="navbar-brand d-flex align-items-center w-25" href="../index.php">
+                <img src="../public/blackwhite.svg" alt="Logo" width="50" height="50" class="me-3 rounded-circle">
+                BeastModeHQ
+            </a>
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <!-- Centered Navigation Links -->
+                <div class="d-flex justify-content-lg-center justify-content-start w-100 ms-0 ms-lg-5 ms-xl-10">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="./dashboard.php">Dashboard</a>
+                        <a class="nav-link active" aria-current="page" href="./membership.php">My Membership</a>
+                        <a class="nav-link" href="./classes.php">My Classes</a>
+                        <a class="nav-link" href="./history.php">Enrollment History</a>
+                    </div>
+                </div>
+                <!-- User Info or Login/Sign Up Buttons -->
+                <div
+                    class="row w-100 d-flex justify-content-center justify-content-lg-end align-items-center gap-3 gap-lg-0">
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <div class="col-12 col-lg-auto">
+                            <span class="text-light">
+                                <strong><?php echo htmlspecialchars(ucwords(strtolower($_SESSION['user_name']))); ?></strong>
+                        </div>
+                        <div class="col-12 col-lg-auto">
+                            <a class="btn btn-danger text-light px-3 w-100" href="../processes/process_logout.php" role="button">Logout</a>
+                        </div>
+                    <?php else: ?>
+                        <div class="col-12 col-lg-auto">
+                            <a class="btn btn-tertiary text-light px-3 w-100" href="../auth/login.php" role="button">Login</a>
+                        </div>
+                        <div class="col-12 col-lg-auto">
+                            <a class="btn btn-brand text-light px-3 w-100" href="../auth/signup.php" type="button">Get
+                                Started</a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <main class="container mt-10">
         <h1 class="mb-4">My Membership</h1>
@@ -60,10 +107,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php if ($membership): ?>
             <div class="card bg-dark text-light ">
-                <div class="card-header bg-purple text-white">
+                <div class="card-header d-flex bg-purple text-white py-3 pb-2 align-items-center bg-gradient">
                     <h5>Membership Details</h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body py-4">
                     <div class="row mb-4">
                         <div class="col-md-6 d-flex gap-2 align-items-center ">
                             <h6 class="text-secondary">Member Name:</h6>

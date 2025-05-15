@@ -44,32 +44,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['membership_id'])) {
         $membershipType = $membership['membership_type'];
         $currentEndDate = $membership['end_date'];
 
-        // Calculate the new end date
+        // Set new start date to current date
+        $newStartDate = date('Y-m-d');
+
+        // Calculate the new end date based on today's date
         $newEndDate = null;
         switch ($membershipType) {
             case 'daily':
-                $newEndDate = date('Y-m-d', strtotime($currentEndDate . ' + 1 day'));
+                $newEndDate = date('Y-m-d', strtotime($newStartDate . ' + 1 day'));
                 break;
             case 'weekly':
-                $newEndDate = date('Y-m-d', strtotime($currentEndDate . ' + 7 days'));
+                $newEndDate = date('Y-m-d', strtotime($newStartDate . ' + 7 days'));
                 break;
             case 'monthly':
-                $newEndDate = date('Y-m-d', strtotime($currentEndDate . ' + 1 month'));
+                $newEndDate = date('Y-m-d', strtotime($newStartDate . ' + 1 month'));
                 break;
             case 'yearly':
-                $newEndDate = date('Y-m-d', strtotime($currentEndDate . ' + 1 year'));
+                $newEndDate = date('Y-m-d', strtotime($newStartDate . ' + 1 year'));
                 break;
         }
 
+
         // Update the membership's end date
-        $updateQuery = "UPDATE memberships SET end_date = ? WHERE id = ?";
+        $updateQuery = "UPDATE memberships SET start_date = ?, end_date = ?, status = 'active' WHERE id = ?";
         $updateStmt = $conn->prepare($updateQuery);
-        $updateStmt->bind_param("si", $newEndDate, $membershipId);
+        $updateStmt->bind_param("ssi", $newStartDate, $newEndDate, $membershipId);
+
 
         if ($updateStmt->execute()) {
-            header("Location: ../../admin/memberships.php?success=membership_renewed");
+            header("Location: ../../admin/memberships.php?success=ID $membershipId Membership Renewed");
         } else {
-            header("Location: ../../admin/memberships.php?error=renew_failed");
+            header("Location: ../../admin/memberships.php?error=ID $membershipId Renew Failed");
         }
 
         $updateStmt->close();

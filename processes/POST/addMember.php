@@ -25,13 +25,16 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = trim($_POST['email']);
     $membershipType = trim($_POST['membership_type']);
-    $startDate = trim($_POST['start_date']);
+
 
     // Validate input
-    if (empty($email) || empty($membershipType) || empty($startDate)) {
+    if (empty($email) || empty($membershipType)) {
         header("Location: ../../admin/memberships.php?error=empty_fields");
         exit();
     }
+
+    // Get current date
+    $startDate = date('Y-m-d');
 
     // Calculate end date based on membership type
     $endDate = null;
@@ -67,14 +70,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $insertStmt->bind_param("isss", $userId, $membershipType, $startDate, $endDate);
 
         if ($insertStmt->execute()) {
-            header("Location: ../../admin/memberships.php?success=membership_added");
+            header("Location: ../../admin/memberships.php?success=Membership added successfully");
         } else {
-            header("Location: ../../admin/memberships.php?error=insert_failed");
+            header("Location: ../../admin/memberships.php?error=Membership failed to add");
         }
 
         $insertStmt->close();
     } else {
-        header("Location: ../../admin/memberships.php?error=user_not_found");
+        header("Location: ../../admin/memberships.php?error=User not found");
     }
 
     $stmt->close();

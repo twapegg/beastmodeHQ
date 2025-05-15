@@ -30,9 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['membership_id'])) {
     $stmt->bind_param("i", $membershipId);
 
     if ($stmt->execute()) {
-        header("Location: ../../admin/memberships.php?success=membership_deleted");
+        header("Location: ../../admin/memberships.php?success=ID $membershipId Membership Deleted");
     } else {
-        header("Location: ../../admin/memberships.php?error=delete_failed");
+        header("Location: ../../admin/memberships.php?error=ID $membershipId Membership Deletion Failed");
     }
 
     $stmt->close();

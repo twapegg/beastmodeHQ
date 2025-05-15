@@ -18,15 +18,28 @@ session_start(); // Start the session
 
 <body>
 
-    <!-- Navigation -->
+
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg bg-primary bg-opacity-25 px-4 py-3" data-bs-theme="dark">
         <div class="container-fluid">
-            <!-- Logo and Brand Name -->
-            <a class="navbar-brand d-flex align-items-center w-25" href="#">
-                <img src="./public/blackwhite.svg" alt="Logo" width="50" height="50" class="me-3 rounded-circle">
-                BeastModeHQ
-            </a>
+            <div class="w-25 d-flex  align-items-center gap-3">
+
+                <!-- Logo and Brand Name -->
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="./public/blackwhite.svg" alt="Logo" width="50" height="50" class="me-3 rounded-circle">
+                    BeastModeHQ
+                </a>
+
+                <?php if (isset($_SESSION['user_role'])): ?>
+                    <?php if ($_SESSION['user_role'] === 'admin'): ?>
+                        <a href="admin/dashboard.php" class="btn btn-sm btn-outline-light">Dashboard</a>
+                    <?php elseif ($_SESSION['user_role'] === 'trainer'): ?>
+                        <a href="trainer/dashboard.php" class="btn btn-sm btn-outline-light">Dashboard</a>
+                    <?php elseif ($_SESSION['user_role'] === 'member'): ?>
+                        <a href="member/dashboard.php" class="btn btn-sm btn-outline-light">Dashboard</a>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
             <!-- Navbar Toggler -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,10 +50,10 @@ session_start(); // Start the session
                 <!-- Centered Navigation Links -->
                 <div class="d-flex justify-content-lg-center justify-content-start w-100 ms-0 ms-lg-5 ms-xl-10">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        <a class="nav-link" href="#">Features</a>
-                        <a class="nav-link" href="#">Gallery</a>
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link active" aria-current="page" href="#hero">Home</a>
+                        <a class="nav-link" href="#features">Features</a>
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                        <a class="nav-link" href="#pricing">Pricing</a>
                         <a class="nav-link" href="classes.php">Classes</a>
                     </div>
                 </div>
@@ -74,7 +87,7 @@ session_start(); // Start the session
     <!-- main -->
     <main class="mt-5">
         <!-- Hero Section -->
-        <section class="hero section">
+        <section class="hero section" id="hero">
             <div class="container">
                 <div class="row">
                     <div class="mt-15 col-md-8 offset-md-2 text-center">
@@ -92,7 +105,7 @@ session_start(); // Start the session
             </div>
         </section>
         <!-- Carousel Section -->
-        <section class="carousel-section section container mt-10">
+        <section class="carousel-section section container mt-10" id="gallery">
             <h1 class="text-center mb-5">Our Facilities ⚡</h1>
             <div id="carouselExample" class="carousel slide custom-carousel">
                 <div class="carousel-inner">
@@ -130,7 +143,7 @@ session_start(); // Start the session
             </div>
         </section>
         <!-- Features Section -->
-        <section class="features section container mt-10">
+        <section class="features section container mt-10" id="features">
             <h1 class="text-center mb-5 text-light">Get the Full Gym Experience</h1>
             <div class="row text-center">
                 <div class="col-md-4 mb-4">
@@ -196,7 +209,7 @@ session_start(); // Start the session
             </div>
         </section>
         <!-- Pricing Section -->
-        <section class="pricing section container mt-5">
+        <section class="pricing section container mt-5" id="pricing">
             <h1 class="text-center mb-5 text-light">Affordable Membership Plans</h1>
             <div class="row text-center">
                 <div class="col-md-4 mb-4">
@@ -210,7 +223,7 @@ session_start(); // Start the session
                                 <li>1 fitness class per week</li>
                                 <li>Locker room access</li>
                             </ul>
-                            <a href="#" class="btn btn-primary mt-auto">Choose Plan</a>
+                            <a href="./member/apply.php" class="btn btn-primary mt-auto">Choose Plan</a>
                         </div>
                     </div>
                 </div>
@@ -225,7 +238,7 @@ session_start(); // Start the session
                                 <li>3 fitness classes per week</li>
                                 <li>Free nutrition counseling</li>
                             </ul>
-                            <a href="#" class="btn btn-success mt-auto">Choose Plan</a>
+                            <a href="./member/apply.php" class="btn btn-success mt-auto">Choose Plan</a>
                         </div>
                     </div>
                 </div>
@@ -241,7 +254,7 @@ session_start(); // Start the session
                                 <li>Access to spa services</li>
                                 <li>Personal trainer sessions</li>
                             </ul>
-                            <a href="#" class="btn btn-warning mt-auto">Choose Plan</a>
+                            <a href="./member/apply.php" class="btn btn-warning mt-auto">Choose Plan</a>
                         </div>
                     </div>
                 </div>
@@ -251,7 +264,7 @@ session_start(); // Start the session
 
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
-        </script>
+    </script>
 </body>
 
 </html>

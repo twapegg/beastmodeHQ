@@ -72,3 +72,13 @@ CREATE TABLE class_enrollments (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (class_session_id) REFERENCES class_sessions(id) ON DELETE CASCADE
 );
+
+CREATE TABLE attendance (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    class_session_id INT NOT NULL,
+    attendance_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('present', 'absent', 'late') DEFAULT 'present',
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (class_session_id) REFERENCES class_sessions(id) ON DELETE CASCADE
+);

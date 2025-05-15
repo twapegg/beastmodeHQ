@@ -32,7 +32,7 @@ include "../processes/GET/getEnrolledUsers.php";
     <nav class="navbar fixed-top navbar-expand-lg bg-dark px-4 py-3" data-bs-theme="dark">
         <div class="container-fluid">
             <!-- Logo and Brand Name -->
-            <a class="navbar-brand d-flex align-items-center w-25" href="#">
+            <a class="navbar-brand d-flex align-items-center w-25" href="./../index.php">
                 <img src="../public/blackwhite.svg" alt="Logo" width="50" height="50" class="me-3 rounded-circle">
                 BeastModeHQ
             </a>

@@ -32,7 +32,7 @@ include "../processes/GET/getAllMembers.php";
     <nav class="navbar fixed-top navbar-expand-lg bg-dark px-4 py-3" data-bs-theme="dark">
         <div class="container-fluid">
             <!-- Logo and Brand Name -->
-            <a class="navbar-brand d-flex align-items-center w-25" href="#">
+            <a class="navbar-brand d-flex align-items-center w-25" href="./../index.php">
                 <img src="../public/blackwhite.svg" alt="Logo" width="50" height="50" class="me-3 rounded-circle">
                 BeastModeHQ
             </a>
@@ -134,10 +134,6 @@ include "../processes/GET/getAllMembers.php";
                                     <option value="yearly">Yearly</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <label for="startDate" class="form-label">Start Date</label>
-                                <input type="date" class="form-control bg-dark text-light border-secondary" id="startDate" name="start_date" required>
-                            </div>
                             <div class="modal-footer border-secondary">
                                 <button type="button" class="btn btn-secondary text-light" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-success text-light">Add Membership</button>
@@ -189,7 +185,7 @@ include "../processes/GET/getAllMembers.php";
                                     // Renew Button
                                     echo "<form action='../processes/POST/renewMember.php' method='POST' class='d-inline'>";
                                     echo "<input type='hidden' name='membership_id' value='" . $row['id'] . "'>";
-                                    echo "<button type='submit' class='btn btn-sm btn-light'>Renew</button>";
+                                    echo "<button type='submit' class='btn btn-sm btn-success text-light'>Renew</button>";
                                     echo "</form>";
                                     // Cancel Button
                                     echo "<form action='../processes/POST/cancelMember.php' method='POST' class='d-inline'>";
@@ -200,14 +196,14 @@ include "../processes/GET/getAllMembers.php";
                                 } elseif ($row['status'] === 'pending') {
                                     echo "<div class='d-flex gap-2' role='group'>";
                                     // Approve Button
-                                    echo "<form action='../processes/POST/reactivateMember.php' method='POST' class='d-inline'>";
+                                    echo "<form action='../processes/POST/renewMember.php' method='POST' class='d-inline'>";
                                     echo "<input type='hidden' name='membership_id' value='" . $row['id'] . "'>";
-                                    echo "<button type='submit' class='btn btn-sm btn-success text-light'>Approve</button>";
+                                    echo "<button type='submit' class='btn btn-sm btn-brand text-light'>Approve</button>";
                                     echo "</form>";
-                                    // Reject Button
-                                    echo "<form action='../processes/POST/rejectMember.php' method='POST' class='d-inline'>";
+                                    // Delete Button
+                                    echo "<form action='../processes/POST/deleteMember.php' method='POST' class='d-inline'>";
                                     echo "<input type='hidden' name='membership_id' value='" . $row['id'] . "'>";
-                                    echo "<button type='submit' class='btn btn-sm btn-warning'>Reject</button>";
+                                    echo "<button type='submit' class='btn btn-sm btn-outline-danger'>Reject</button>";
                                     echo "</form>";
                                     echo "</div>";
                                 } elseif ($row['status'] === 'expired') {
@@ -215,7 +211,7 @@ include "../processes/GET/getAllMembers.php";
                                     // Renew Button
                                     echo "<form action='../processes/POST/renewMember.php' method='POST' class='d-inline'>";
                                     echo "<input type='hidden' name='membership_id' value='" . $row['id'] . "'>";
-                                    echo "<button type='submit' class='btn btn-sm btn-light'>Renew</button>";
+                                    echo "<button type='submit' class='btn btn-sm btn-outline-success'>Renew</button>";
                                     echo "</form>";
                                     // Delete Button
                                     echo "<form action='../processes/POST/deleteMember.php' method='POST' class='d-inline'>";
@@ -225,10 +221,10 @@ include "../processes/GET/getAllMembers.php";
                                     echo "</div>";
                                 } elseif ($row['status'] === 'canceled') {
                                     echo "<div class='d-flex gap-2' role='group'>";
-                                    // Reactivate Button
-                                    echo "<form action='../processes/POST/reactivateMember.php' method='POST' class='d-inline'>";
+                                    // Renew
+                                    echo "<form action='../processes/POST/renewMember.php' method='POST' class='d-inline'>";
                                     echo "<input type='hidden' name='membership_id' value='" . $row['id'] . "'>";
-                                    echo "<button type='submit' class='btn btn-sm btn-success text-light'>Reactivate</button>";
+                                    echo "<button type='submit' class='btn btn-sm btn-outline-success '>Renew</button>";
                                     echo "</form>";
                                     // Delete Button
                                     echo "<form action='../processes/POST/deleteMember.php' method='POST' class='d-inline'>";

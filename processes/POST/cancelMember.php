@@ -25,14 +25,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['membership_id'])) {
     $membershipId = intval($_POST['membership_id']);
 
     // Update the membership status to 'canceled'
-    $updateQuery = "UPDATE memberships SET status = 'canceled' WHERE id = ?";
+    $updateQuery = "UPDATE memberships SET status = 'canceled', end_date = DATE_ADD(CURDATE(), INTERVAL 7 DAY) WHERE id = ?";
     $stmt = $conn->prepare($updateQuery);
     $stmt->bind_param("i", $membershipId);
 
     if ($stmt->execute()) {
-        header("Location: ../../admin/memberships.php?success=membership_canceled");
+        header("Location: ../../admin/memberships.php?success=ID $membershipId Membership Canceled");
     } else {
-        header("Location: ../../admin/memberships.php?error=cancel_failed");
+        header("Location: ../../admin/memberships.php?error=ID $membershipId Membership Cancellation Failed");
     }
 
     $stmt->close();
