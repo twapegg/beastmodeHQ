@@ -1,3 +1,26 @@
+<?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id']) ) {
+    header("Location: auth/login.php");
+    exit();
+}
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "beastmodehq";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -40,215 +63,134 @@
                 </div>
                 <!-- Login and Sign Up Buttons -->
                 <div
-                    class="row w-100 d-flex justify-content-center justify-content-lg-end align-items-center gap-3 gap-lg-0">
-                    <div class="col-12 col-lg-auto">
-                        <a class="btn btn-tertiary text-light px-3 w-100" href="auth/login.php" role="button">Login</a>
-                    </div>
-                    <div class="col-12 col-lg-auto">
-                        <a class="btn btn-brand text-light px-3 w-100" href="auth/signup.php" type="button">Get
-                            Started</a>
-                    </div>
+                    class="row w-100 d-flex justify-c</body>ontent-center justify-content-lg-end align-items-center gap-3 gap-lg-0">
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <div class="col-12 col-lg-auto">
+                            <span class="text-light">
+                                <strong><?php echo htmlspecialchars(ucwords(strtolower($_SESSION['user_name']))); ?></strong>
+                        </div>
+                        <div class="col-12 col-lg-auto">
+                            <a class="btn btn-danger text-light px-3 w-100" href="./processes/process_logout.php" role="button">Logout</a>
+                        </div>
+                    <?php else: ?>
+                        <div class="col-12 col-lg-auto">
+                            <a class="btn btn-tertiary text-light px-3 w-100" href="auth/login.php" role="button">Login</a>
+                        </div>
+                 </div>       <div class="col-12 col-lg-auto">
+                            <a class="btn btn-brand text-light px-3 w-100" href="auth/signup.php" type="button">Get
+                                Sta</select>rted</a>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </nav>
 
-
-
-
+    
     <!-- main -->
     <main class="container mt-5">
 
-    <h1 class="mt-5">All Classes</h1>
+        <h1 class="mt-5">All Classes</h1>
 
-    <div class="container bg-dark p-4 rounded shadow-sm">
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <form class="d-flex align-items-center">
-                    <i class="bi bi-search"></i>
-                    <input class="form-control ms-2 me-2 text-light" type="search" placeholder="Search classes..." aria-label="Search">
-                    <button class="btn btn-secondary" type="submit"> Search</button>  
+        <div class="container bg-dark p-4 rounded shadow-sm">
+            <div class="row mb-4">
+                <form class="d-flex" method="GET" action="">
 
-            </form>
-        </div>
-        <div class="col-md-6">
-            <div class="d-flex justify-content-md-end justify-content-start mt-3 mt-md-0">
-                <select class="form-select w-auto me-2 text-light" aria-label="Filter by category">
-                    <option selected>Filter by Category</option>
-                    <option value="1">Strength</option>
-                    <option value="2">Cardio</option>
-                    <option value="3">Flexibility</option>
-                </select>
-                <select class="form-select w-auto me-2 text-light" aria-label="Filter by availability">
-                    <option selected>Filter by Availability</option>
-                    <option value="1">Available</option>
-                    <option value="2">Full</option>
-                </select>
-                <select class="form-select w-auto text-light" aria-label="Sort by date">
-                    <option selected>Sort by Date</option>
-                    <option value="1">Upcoming</option>
-                    <option value="2">Past</option>
-                </select>
-            </div>
-        </div>
-    </div>
-        <div class="row justify-content-evenly mt-2">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Search classes..." aria-label="Search" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                    <button class="btn btn-secondary me-2" type="submit">Search</button>
 
-            <div class="col-3">
+                    <select class="form-select w-auto me-2" name="sort" onchange="this.form.submit()">
+                        <option value="" disabled selected>Sort by</option>
+                        <option value="asc" <?php echo (isset($_GET['sort']) && $_GET['sort'] === 'asc') ? 'selected' : ''; ?>>Date Ascending</option>
+                        <option value="desc" <?php echo (isset($_GET['sort']) && $_GET['sort'] === 'desc') ? 'selected' : ''; ?>>Date Descending</option>
+                    </select>
 
-                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+                    <select class="form-select w-auto" name="availability" onchange="this.form.submit()">
+                        <option value="all" <?php echo (!isset($_GET['availability']) || $_GET['availability'] === 'all') ? 'selected' : ''; ?>>All</option>
+                        <option value="available" <?php echo (isset($_GET['availability']) && $_GET['availability'] === 'available') ? 'selected' : ''; ?>>Available</option>
+                        <option value="full" <?php echo (isset($_GET['availability']) && $_GET['availability'] === 'full') ? 'selected' : ''; ?>>Full</option>
+                    </select>
 
-                    <img class="d-block mx-auto rounded card-img-top" src="images/calisthenics.jpg" width="280px"
-                        height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+                </form>
 
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                    </div>
-                </div>
+                <?php
 
-            </div>
+                    $searchCondition = '';
+                    
+                    if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
+                        $searchTerm = $conn->real_escape_string(trim($_GET['search']));
+                        $searchCondition = "WHERE c.name LIKE '%$searchTerm%'";
+                    }
 
-            <div class="col-3">
+                    $sortOrder = 'DESC'; // Default sort order
+                    if (isset($_GET['sort']) && in_array($_GET['sort'], ['asc', 'desc'])) {
+                        $sortOrder = strtoupper($_GET['sort']);
+                    }
 
-                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+                    $availabilityCondition = '';
 
-                    <img class="d-block mx-auto rounded card-img-top" src="images/pilates.png   " width="280px"
-                        height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Pilates</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+                    if (isset($_GET['availability']) && $_GET['availability'] !== 'all') {
+                        if ($_GET['availability'] === 'available') {
+                            $availabilityCondition = "HAVING enrolled_count < cs.capacity";
+                        } elseif ($_GET['availability'] === 'full') {
+                            $availabilityCondition = "HAVING enrolled_count >= cs.capacity";
+                        }
+                    }
 
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                    </div>
-                </div>
+                    $sql = "
+                            SELECT 
+                            cs.id AS session_id,
+                            c.name AS class_name,
+                            c.description AS class_description,
+                            cs.session_date,
+                            cs.start_time,
+                            cs.end_time,
+                            cs.capacity,
+                            COUNT(ce.id) AS enrolled_count
 
-            </div>
+                            FROM class_sessions cs
+                            JOIN classes c ON cs.class_id = c.id
+                            LEFT JOIN class_enrollments ce ON cs.id = ce.class_session_id
+                            $searchCondition
+                            GROUP BY cs.id, c.name, c.description, cs.session_date, cs.start_time, cs.end_time, cs.capacity
+                            $availabilityCondition
+                            ORDER BY cs.session_date $sortOrder, cs.start_time $sortOrder";
 
-            <div class="col-3">
+                    $result = $conn->query($sql);
 
-                <div class="card h-100 bg-primary text-light p-3 pb-3 shadow-sm">
+                    if ($result->num_rows > 0) {
 
-                    <img class="d-block mx-auto rounded card-img-top" src="images/circuit.png" height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Circuit Training</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+                        echo '<div class="row justify-content-evenly mt-2 g-4">';
 
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                    </div>
-                </div>
+                        while ($row = $result->fetch_assoc()) {
 
-            </div>
+                            echo '<div class="col-3">';
+                            echo '<div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">';
+                            echo '<img src="./images/' . htmlspecialchars($row['class_name']) . '.png" class="card-img-top rounded" alt="' . htmlspecialchars($row['class_name']) . '">';
+                            echo '<h5 class="text-white fw-semibold text-start mt-2">' . htmlspecialchars($row['class_name']) . '</h5>';
+                            echo '<p class="fw-light text-secondary">' . htmlspecialchars(date("D, M j, Y - g:i A", strtotime($row['session_date'] . ' ' . $row['start_time']))) . '</p>';
+                            echo '<p class="text-light">' . htmlspecialchars($row['class_description']) . '</p>';
+                            echo '<div class="card-footer d-flex justify-content-between p-0">';
 
-            <div class="col-3">
+                            $enrolledCountSql = "SELECT COUNT(*) AS enrolled_count FROM class_enrollments WHERE class_session_id = " . intval($row['session_id']);
+                            $enrolledCountResult = $conn->query($enrolledCountSql);
+                            $enrolledCount = $enrolledCountResult->fetch_assoc()['enrolled_count'];
 
-                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+                            echo '<p class="text-white fw-lighter fs-6"><i class="bi bi-person-fill"></i> ' . htmlspecialchars($enrolledCount) . '/' . htmlspecialchars($row['capacity']) . '</p>';
+                            echo '<button type="submit" class="col-4 btn btn-secondary">Enroll</button>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
 
-                    <img class="d-block mx-auto rounded card-img-top" src="images/weight.png" width="280px"
-                        height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Weight Training</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
-
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                    </div>
-                </div>
+                        echo '</div>';
+                    } else {
+                        echo '<p class="text-light">No classes match your search.</p>';
+                    }
+                ?>
 
             </div>
         </div>
-
-        <div class="row justify-content-evenly mt-4">
-
-            <div class="col-3">
-
-                <div class="card h-100 bg-primary text-light p-3 pb-3 shadow-sm">
-
-                    <img class="d-block mx-auto rounded card-img-top" src="images/hiit.png" width="280px"
-                        height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">HIIT Training</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
-
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-3">
-
-                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
-
-                    <img class="d-block mx-auto rounded card-img-top" src="images/zumba.png" width="280px"
-                        height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Zumba</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
-
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-3">
-
-                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
-
-                    <img class="d-block mx-auto rounded card-img-top" src="images/cardio.png" width="280px"
-                        height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Cardio Training</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
-
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-3">
-
-                <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
-
-                    <img class="d-block mx-auto rounded card-img-top" src="images/yoga.png" width="280px"
-                        height="150px" alt="black man working out">
-                    <h5 class="text-white fw-semibold text-start mt-2">Yoga</h5>
-                    <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
-
-                    <div class="card-footer d-flex justify-content-between p-0">
-                        <p class="text-white fw-lighter fs-6">
-                            <i class="bi bi-person-fill"></i> 5/10
-                        </p>
-                        <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
