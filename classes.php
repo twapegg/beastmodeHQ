@@ -62,8 +62,7 @@ if ($conn->connect_error) {
                     </div>
                 </div>
                 <!-- Login and Sign Up Buttons -->
-                <div
-                    class="row w-100 d-flex justify-c</body>ontent-center justify-content-lg-end align-items-center gap-3 gap-lg-0">
+                <div class="row w-100 d-flex justify-c</body>ontent-center justify-content-lg-end align-items-center gap-3 gap-lg-0">
                     <?php if (isset($_SESSION['user_id'])): ?>
                         <div class="col-12 col-lg-auto">
                             <span class="text-light">

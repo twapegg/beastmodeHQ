@@ -1,3 +1,26 @@
+<?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'member') {
+    header("Location: ../auth/login.php");
+    exit();
+}
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "beastmodehq";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -39,15 +62,24 @@
                     </div>
                 </div>
                 <!-- Login and Sign Up Buttons -->
-                <div
-                    class="row w-100 d-flex justify-content-center justify-content-lg-end align-items-center gap-3 gap-lg-0">
-                    <div class="col-12 col-lg-auto">
-                        <a class="btn btn-tertiary text-light px-3 w-100" href="auth/login.php" role="button">Login</a>
-                    </div>
-                    <div class="col-12 col-lg-auto">
-                        <a class="btn btn-brand text-light px-3 w-100" href="auth/signup.php" type="button">Get
-                            Started</a>
-                    </div>
+                <div class="row w-100 d-flex justify-c</body>ontent-center justify-content-lg-end align-items-center gap-3 gap-lg-0">
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <div class="col-12 col-lg-auto">
+                            <span class="text-light">
+                                <strong><?php echo htmlspecialchars(ucwords(strtolower($_SESSION['user_name']))); ?></strong>
+                        </div>
+                        <div class="col-12 col-lg-auto">
+                            <a class="btn btn-danger text-light px-3 w-100" href="./processes/process_logout.php" role="button">Logout</a>
+                        </div>
+                    <?php else: ?>
+                        <div class="col-12 col-lg-auto">
+                            <a class="btn btn-tertiary text-light px-3 w-100" href="auth/login.php" role="button">Login</a>
+                        </div>
+                 </div>       <div class="col-12 col-lg-auto">
+                            <a class="btn btn-brand text-light px-3 w-100" href="auth/signup.php" type="button">Get
+                                Sta</select>rted</a>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -64,35 +96,63 @@
         <div class="container bg-dark rounded p-3 shadow-lg">
             <div class="row justify-content-evenly">
 
+            <?php
+                // Fetch upcoming classes within 3 days
+                $upcomingClassesSql = "
+                    SELECT COUNT(*) AS upcoming_count
+                    FROM class_sessions cs
+                    JOIN class_enrollments ce ON cs.id = ce.class_session_id
+                    WHERE ce.user_id = ? AND cs.session_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 3 DAY)";
+
+                $stmt = $conn->prepare($upcomingClassesSql);
+                $stmt->bind_param("i", $_SESSION['user_id']);
+                $stmt->execute();
+                $stmt->bind_result($upcomingCount);
+                $stmt->fetch();
+                $stmt->close();
+
+                // Fetch sessions this month
+                $sessionsThisMonthSql = "
+                    SELECT COUNT(*) AS monthly_count
+                    FROM class_sessions cs
+                    JOIN class_enrollments ce ON cs.id = ce.class_session_id
+                    WHERE ce.user_id = ? AND MONTH(cs.session_date) = MONTH(CURDATE()) AND YEAR(cs.session_date) = YEAR(CURDATE())";
+                    
+                $stmt = $conn->prepare($sessionsThisMonthSql);
+                $stmt->bind_param("i", $_SESSION['user_id']);
+                $stmt->execute();
+                $stmt->bind_result($monthlyCount);
+                $stmt->fetch();
+                $stmt->close();
+            ?>
+
             <div class="col-4">
-                    <div class="row justify-content-center">
-                    <div class="card col-3  bg-white white rounded-0 rounded-start">
+                <div class="row justify-content-center">
+                    <div class="card col-3 bg-white white rounded-0 rounded-start">
                         <i class="bi bi-calendar-event text-secondary-emphasis display-3 mt-4 ms-2"></i>
-                    </div>     
+                    </div>
                     <div class="card col-8 h-100 rounded-0 rounded-end bg-primary text-light">
                         <div class="card-body d-flex flex-column p-4">
-                            <h5 class="card-title ">Upcoming Classes</h5>
-                            <p class="card-text text-secondary mt-4 fs-3">3</p>
+                            <h5 class="card-title">Upcoming Classes</h5>
+                            <p class="card-text text-secondary mt-4 fs-3"><?php echo $upcomingCount; ?></p>
                         </div>
                     </div>
-                    </div>
-
+                </div>
             </div>
 
-                <div class="col-4">
-                    <div class="row justify-content-center">
-                    <div class="card col-3  bg-white white rounded-0 rounded-start">
+            <div class="col-4">
+                <div class="row justify-content-center">
+                    <div class="card col-3 bg-white white rounded-0 rounded-start">
                         <i class="bi bi-calendar3 text-secondary-emphasis display-3 mt-4 ms-2"></i>
-                    </div>     
+                    </div>
                     <div class="card col-8 h-100 rounded-0 rounded-end bg-primary text-light">
                         <div class="card-body d-flex flex-column p-4">
-                            <h5 class="card-title ">Sessions this Month</h5>
-                            <p class="card-text text-secondary mt-4 fs-3">12</p>
+                            <h5 class="card-title">Sessions this Month</h5>
+                            <p class="card-text text-secondary mt-4 fs-3"><?php echo $monthlyCount; ?></p>
                         </div>
                     </div>
-                    </div>
-
                 </div>
+            </div>
 
                 <div class="col-4">
                     <div class="row justify-content-center">
@@ -115,112 +175,102 @@
         <h3 class="mt-5">Available Classes</h3>
 
         <div class="container bg-dark rounded p-3 shadow-sm">
-
             <div class="row mb-4">
-                <div class="col-md-6">
-                    <form class="d-flex align-items-center">
-                        <i class="bi bi-search"></i>
-                        <input class="form-control me-2 ms-2 text-white" type="search" placeholder="Search classes..." aria-label="Search">
-                        <button class="btn btn-secondary" type="submit">Search</button>
-                    </form>
-                </div>
-                <div class="col-md-6">
-                    <div class="d-flex justify-content-md-end justify-content-start mt-3 mt-md-0">
-                        <select class="form-select w-auto me-2 text-light" aria-label="Filter by category">
-                            <option selected>Filter by Category</option>
-                            <option value="1">Strength</option>
-                            <option value="2">Cardio</option>
-                            <option value="3">Flexibility</option>
-                        </select>
-                        <select class="form-select w-auto text-light" aria-label="Sort by date">
-                            <option selected>Sort by Date</option>
-                            <option value="1">Upcoming</option>
-                            <option value="2">Past</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+                <form class="d-flex" method="GET" action="">
 
-            <div class="row justify-content-evenly mt-1">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Search classes..." aria-label="Search" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                    <button class="btn btn-secondary me-2" type="submit">Search</button>
 
-            <div class="col-3">
+                    <select class="form-select w-auto me-2" name="sort" onchange="this.form.submit()">
+                        <option value="" disabled selected>Sort by</option>
+                        <option value="asc" <?php echo (isset($_GET['sort']) && $_GET['sort'] === 'asc') ? 'selected' : ''; ?>>Date Ascending</option>
+                        <option value="desc" <?php echo (isset($_GET['sort']) && $_GET['sort'] === 'desc') ? 'selected' : ''; ?>>Date Descending</option>
+                    </select>
 
-            <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+                </form>
 
-                <img class="d-block mx-auto rounded card-img-top" src="../images/calisthenics.jpg" width="280px"
-                    height="150px" alt="black man working out">
-                <h5 class="text-white fw-semibold text-start mt-2">Calisthenics Training</h5>
-                <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+                <?php
 
-                <div class="card-footer d-flex justify-content-between p-0">
-                    <p class="text-white fw-lighter fs-6">
-                        <i class="bi bi-person-fill display-6";"></i> 5/10
-                    </p>
-                    <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                </div>
-            </div>
+                    $searchCondition = '';
+                    
+                    if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
+                        $searchTerm = $conn->real_escape_string(trim($_GET['search']));
+                        $searchCondition = "WHERE c.name LIKE '%$searchTerm%'";
+                    }
 
-            </div>
+                    $sortOrder = 'DESC'; // Default sort order
+                    if (isset($_GET['sort']) && in_array($_GET['sort'], ['asc', 'desc'])) {
+                        $sortOrder = strtoupper($_GET['sort']);
+                    }
 
-            <div class="col-3">
+                    $availabilityCondition = '';
 
-            <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
+                    if (isset($_GET['availability']) && $_GET['availability'] !== 'all') {
+                        if ($_GET['availability'] === 'available') {
+                            $availabilityCondition = "HAVING enrolled_count < cs.capacity";
+                        } elseif ($_GET['availability'] === 'full') {
+                            $availabilityCondition = "HAVING enrolled_count >= cs.capacity";
+                        }
+                    }
 
-                <img class="d-block mx-auto rounded card-img-top" src="../images/pilates.png   " width="280px"
-                    height="150px" alt="black man working out">
-                <h5 class="text-white fw-semibold text-start mt-2">Pilates</h5>
-                <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+                    $sql = "
+                            SELECT 
+                            cs.id AS session_id,
+                            c.name AS class_name,
+                            c.description AS class_description,
+                            cs.session_date,
+                            cs.start_time,
+                            cs.end_time,
+                            cs.capacity,
+                            COUNT(ce.id) AS enrolled_count
 
-                <div class="card-footer d-flex justify-content-between p-0">
-                    <p class="text-white fw-lighter fs-6">
-                        <i class="bi bi-person-fill"></i> 5/10
-                    </p>
-                    <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                </div>
-            </div>
+                            FROM class_sessions cs
+                            JOIN classes c ON cs.class_id = c.id
+                            LEFT JOIN class_enrollments ce ON cs.id = ce.class_session_id
+                            $searchCondition
+                            GROUP BY cs.id, c.name, c.description, cs.session_date, cs.start_time, cs.end_time, cs.capacity
+                            $availabilityCondition
+                            ORDER BY cs.session_date $sortOrder, cs.start_time $sortOrder";
 
-            </div>
+                    $result = $conn->query($sql);
 
-            <div class="col-3">
+                    if ($result->num_rows > 0) {
 
-            <div class="card h-100 bg-primary text-light p-3 pb-3 shadow-sm">
+                        echo '<div class="row justify-content-evenly mt-2 g-4">';
 
-                <img class="d-block mx-auto rounded card-img-top" src="../images/circuit.png" height="150px" alt="black man working out">
-                <h5 class="text-white fw-semibold text-start mt-2">Circuit Training</h5>
-                <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
+                        while ($row = $result->fetch_assoc()) {
+                            if ($row['enrolled_count'] < $row['capacity']) { 
 
-                <div class="card-footer d-flex justify-content-between p-0">
-                    <p class="text-white fw-lighter fs-6">
-                        <i class="bi bi-person-fill"></i> 5/10
-                    </p>
-                    <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                </div>
-            </div>
+                                echo '<div class="col-3">';
+                                echo '<div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">';
+                                echo '<img src="../images/' . htmlspecialchars($row['class_name']) . '.png" class="card-img-top rounded" alt="' . htmlspecialchars($row['class_name']) . '">';
+                                echo '<h5 class="text-white fw-semibold text-start mt-2">' . htmlspecialchars($row['class_name']) . '</h5>';
+                                echo '<p class="fw-light text-secondary">' . htmlspecialchars(date("D, M j, Y - g:i A", strtotime($row['session_date'] . ' ' . $row['start_time']))) . '</p>';
+                                echo '<p class="text-light">' . htmlspecialchars($row['class_description']) . '</p>';
+                                echo '<div class="card-footer d-flex justify-content-between p-0">';
 
-            </div>
+                                echo '<p class="text-white fw-lighter fs-6"><i class="bi bi-person-fill"></i> ' . htmlspecialchars($row['enrolled_count']) . '/' . htmlspecialchars($row['capacity']) . '</p>';
+                                echo '<button type="submit" class="col-4 btn btn-secondary">Enroll</button>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+                        }
 
-            <div class="col-3">
-
-            <div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">
-
-                <img class="d-block mx-auto rounded card-img-top" src="../images/weight.png" width="280px"
-                    height="150px" alt="black man working out">
-                <h5 class="text-white fw-semibold text-start mt-2">Weight Training</h5>
-                <p class="fw-light text-secondary">Mon, April 29, 2025 - 10:00 AM</p>
-
-                <div class="card-footer d-flex justify-content-between p-0">
-                    <p class="text-white fw-lighter fs-6">
-                        <i class="bi bi-person-fill"></i> 5/10
-                    </p>
-                    <button type="submit" class=" col-4 btn btn-secondary">Enroll</button>
-                </div>
-            </div>
+                        echo '</div>';
+                    } else {
+                        echo '<p class="text-light">No classes match your search.</p>';
+                    }
+                
+                ?>
 
             </div>
+            
         </div>
+
     </div>
 
-    </main>
+    </mai>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
