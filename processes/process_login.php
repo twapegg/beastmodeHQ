@@ -44,9 +44,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_role'] = $user['role'];
+            $stmt->close();
 
-            // Redirect to a dashboard or home page
-            header("Location: ../index.php");
+            // Redirect to dashboard depending on role
+
+            if ($user['role'] === 'admin') {
+                header("Location: ../admin/dashboard.php");
+            } else {
+                header("Location: ../member/dashboard.php");
+            }
             exit();
         } else {
             // Invalid password
@@ -58,9 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: ../auth/login.php?error=no_account");
         exit();
     }
-
-    $stmt->close();
 }
 
 $conn->close();
-?>
