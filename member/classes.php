@@ -12,7 +12,8 @@ include "../processes/GET/getUserClasses.php";
 
 // Fetch upcoming class sessions for the logged-in user
 $userId = $_SESSION['user_id'];
-$classSessions = getUserClasses($userId);
+$search = isset($_GET['search']) ? $_GET['search'] : null;
+$classSessions = getUserClasses($userId, $search);
 ?>
 
 <!DOCTYPE html>

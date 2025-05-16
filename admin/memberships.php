@@ -77,7 +77,7 @@ include "../processes/GET/getAllMembers.php";
         </div>
     </nav>
 
-    <main class="container mt-10">
+    <main class="container my-10">
 
 
         <h1 class="mb-4">Manage Memberships</h1>
