@@ -18,7 +18,7 @@ if (!empty($search)) {
               LEFT JOIN class_enrollments ce ON cs.id = ce.class_session_id AND ce.status = 'enrolled'
               WHERE c.name LIKE ? OR cs.session_date LIKE ?
               GROUP BY cs.id
-              ORDER BY cs.session_date DESC";
+              ORDER BY cs.session_date ASC";
     $stmt = $conn->prepare($query);
     $searchTerm = '%' . $search . '%';
     $stmt->bind_param("ss", $searchTerm, $searchTerm);
@@ -37,7 +37,7 @@ if (!empty($search)) {
               INNER JOIN classes c ON cs.class_id = c.id
               LEFT JOIN class_enrollments ce ON cs.id = ce.class_session_id AND ce.status = 'enrolled'
               GROUP BY cs.id
-              ORDER BY cs.session_date DESC";
+              ORDER BY cs.session_date ASC";
     $result = $conn->query($query);
 }
 
@@ -45,4 +45,3 @@ if (!empty($search)) {
 if (!$result) {
     die("Query failed: " . $conn->error);
 }
-?>
