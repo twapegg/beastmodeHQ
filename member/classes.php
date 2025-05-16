@@ -21,10 +21,10 @@ $classSessions = getUserClasses($userId);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles.css">
-    <link rel="shortcut icon" href="../public/favicon.ico" type="image/x-icon">
     <title>My Classes</title>
 </head>
 
@@ -97,6 +97,21 @@ $classSessions = getUserClasses($userId);
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
+
+        <!-- Search and Add Class -->
+        <div class="w-100 d-flex justify-content-between align-items-center mb-4">
+            <!-- Search Form -->
+            <form method="GET" action="classes.php" class="mb-4 w-50 d-flex gap-2">
+                <input type="text" class="form-control bg-dark text-light border-secondary rounded-3" name="search"
+                    placeholder="Search by class name"
+                    value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                <button class="btn btn-purple rounded-3" type="submit">Search</button>
+                <a href="classes.php" class="btn btn-outline-secondary rounded-3">Clear</a>
+            </form>
+            <!-- Button to trigger modal -->
+
+            <a href="../classes.php" class="btn btn-light text-dark btn-sm px-3 py-2 d-flex gap-2"><i class="bi bi-plus-square text-dark"></i> Book a Class</a>
+        </div>
 
 
         <?php if (!empty($classSessions)): ?>

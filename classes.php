@@ -1,23 +1,9 @@
 <?php
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id']) ) {
-    header("Location: auth/login.php");
-    exit();
-}
+$userId = $_SESSION['user_id'] ?? null;
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "beastmodehq";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 ?>
 
@@ -35,15 +21,28 @@ if ($conn->connect_error) {
 </head>
 
 <body>
+
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg bg-primary bg-opacity-25 px-4 py-3" data-bs-theme="dark">
+    <nav class="navbar fixed-top navbar-expand-lg bg-primary bg-opacity-25 px-4 py-3" data-bs-theme="dark">
         <div class="container-fluid">
-            <!-- Logo and Brand Name -->
-            <a class="navbar-brand d-flex align-items-center w-25" href="#">
-                <img src="./public/blackwhite.svg" alt="Logo" width="50" height="50" class="me-3  rounded-circle">
-                <!-- Replace with your logo path -->
-                BeastModeHQ
-            </a>
+            <div class="w-25 d-flex  align-items-center gap-3">
+
+                <!-- Logo and Brand Name -->
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="./public/blackwhite.svg" alt="Logo" width="50" height="50" class="me-3 rounded-circle">
+                    BeastModeHQ
+                </a>
+
+                <?php if (isset($_SESSION['user_role'])): ?>
+                    <?php if ($_SESSION['user_role'] === 'admin'): ?>
+                        <a href="admin/dashboard.php" class="btn btn-sm btn-outline-light">Dashboard</a>
+                    <?php elseif ($_SESSION['user_role'] === 'trainer'): ?>
+                        <a href="trainer/dashboard.php" class="btn btn-sm btn-outline-light">Dashboard</a>
+                    <?php elseif ($_SESSION['user_role'] === 'member'): ?>
+                        <a href="member/dashboard.php" class="btn btn-sm btn-outline-light">Dashboard</a>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
             <!-- Navbar Toggler -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,33 +51,34 @@ if ($conn->connect_error) {
             <!-- Navbar Content -->
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <!-- Centered Navigation Links -->
-                <div class="d-flex justify-content-lg-center justify-content-start w-100 ms-0 ms-lg-5 ms-xl-10 ">
+                <div class="d-flex justify-content-lg-center justify-content-start w-100 ms-0 ms-lg-5 ms-xl-10">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        <a class="nav-link" href="#">Features</a>
-                        <a class="nav-link" href="#">Gallery</a>
-                        <a class="nav-link" href="#">Pricing</a>
-                        <a class="nav-link" href="#">Classes</a>
+                        <a class="nav-link" href="#hero">Home</a>
+                        <a class="nav-link" href="#features">Features</a>
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                        <a class="nav-link active" aria-current="page" href="classes.php">Classes</a>
                     </div>
                 </div>
-                <!-- Login and Sign Up Buttons -->
+                <!-- User Info or Login/Sign Up Buttons -->
                 <div
-                    class="row w-100 d-flex justify-c</body>ontent-center justify-content-lg-end align-items-center gap-3 gap-lg-0">
+                    class="row w-100 d-flex justify-content-center justify-content-lg-end align-items-center gap-3 gap-lg-0">
                     <?php if (isset($_SESSION['user_id'])): ?>
                         <div class="col-12 col-lg-auto">
                             <span class="text-light">
                                 <strong><?php echo htmlspecialchars(ucwords(strtolower($_SESSION['user_name']))); ?></strong>
                         </div>
                         <div class="col-12 col-lg-auto">
-                            <a class="btn btn-danger text-light px-3 w-100" href="./processes/process_logout.php" role="button">Logout</a>
+                            <a class="btn btn-danger text-light px-3 w-100" href="./processes/process_logout.php"
+                                role="button">Logout</a>
                         </div>
                     <?php else: ?>
                         <div class="col-12 col-lg-auto">
                             <a class="btn btn-tertiary text-light px-3 w-100" href="auth/login.php" role="button">Login</a>
                         </div>
-                 </div>       <div class="col-12 col-lg-auto">
+                        <div class="col-12 col-lg-auto">
                             <a class="btn btn-brand text-light px-3 w-100" href="auth/signup.php" type="button">Get
-                                Sta</select>rted</a>
+                                Started</a>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -86,109 +86,109 @@ if ($conn->connect_error) {
         </div>
     </nav>
 
-    
+
     <!-- main -->
-    <main class="container mt-5">
+    <main class="container mt-10">
+        <h1 class="mb-4">All Classes</h1>
 
-        <h1 class="mt-5">All Classes</h1>
+        <div class="row">
 
-        <div class="container bg-dark p-4 rounded shadow-sm">
-            <div class="row mb-4">
-                <form class="d-flex" method="GET" action="">
+            <!-- Display Bootstrap Alert -->
+            <?php if (isset($_GET['success'])): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?php echo htmlspecialchars($_GET['success']); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
 
-                    <input class="form-control me-2" type="search" name="search" placeholder="Search classes..." aria-label="Search" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-                    <button class="btn btn-secondary me-2" type="submit">Search</button>
+            <?php if (isset($_GET['error'])): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?php echo htmlspecialchars($_GET['error']); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
 
-                    <select class="form-select w-auto me-2" name="sort" onchange="this.form.submit()">
-                        <option value="" disabled selected>Sort by</option>
-                        <option value="asc" <?php echo (isset($_GET['sort']) && $_GET['sort'] === 'asc') ? 'selected' : ''; ?>>Date Ascending</option>
-                        <option value="desc" <?php echo (isset($_GET['sort']) && $_GET['sort'] === 'desc') ? 'selected' : ''; ?>>Date Descending</option>
-                    </select>
 
-                    <select class="form-select w-auto" name="availability" onchange="this.form.submit()">
-                        <option value="all" <?php echo (!isset($_GET['availability']) || $_GET['availability'] === 'all') ? 'selected' : ''; ?>>All</option>
-                        <option value="available" <?php echo (isset($_GET['availability']) && $_GET['availability'] === 'available') ? 'selected' : ''; ?>>Available</option>
-                        <option value="full" <?php echo (isset($_GET['availability']) && $_GET['availability'] === 'full') ? 'selected' : ''; ?>>Full</option>
-                    </select>
-
+            <div class="w-100 d-flex justify-content-between align-items-center mb-4">
+                <!-- Search Form -->
+                <form method="GET" action="classes.php" class="mb-4 w-50 d-flex gap-2">
+                    <input type="text" class="form-control bg-dark text-light border-secondary rounded-3" name="search"
+                        placeholder="Search by class name"
+                        value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                    <button class="btn btn-purple rounded-3" type="submit">Search</button>
+                    <a href="classes.php" class="btn btn-outline-secondary rounded-3">Clear</a>
                 </form>
+            </div>
 
-                <?php
+            <div class="col-lg-12 rounded">
+                <div id="" class="row g-4">
 
-                    $searchCondition = '';
-                    
-                    if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
-                        $searchTerm = $conn->real_escape_string(trim($_GET['search']));
-                        $searchCondition = "WHERE c.name LIKE '%$searchTerm%'";
-                    }
+                    <?php
+                    include "processes/GET/getAvailableSessions.php"; // Include the database connection and query
 
-                    $sortOrder = 'DESC'; // Default sort order
-                    if (isset($_GET['sort']) && in_array($_GET['sort'], ['asc', 'desc'])) {
-                        $sortOrder = strtoupper($_GET['sort']);
-                    }
-
-                    $availabilityCondition = '';
-
-                    if (isset($_GET['availability']) && $_GET['availability'] !== 'all') {
-                        if ($_GET['availability'] === 'available') {
-                            $availabilityCondition = "HAVING enrolled_count < cs.capacity";
-                        } elseif ($_GET['availability'] === 'full') {
-                            $availabilityCondition = "HAVING enrolled_count >= cs.capacity";
-                        }
-                    }
-
-                    $sql = "
-                            SELECT 
-                            cs.id AS session_id,
-                            c.name AS class_name,
-                            c.description AS class_description,
-                            cs.session_date,
-                            cs.start_time,
-                            cs.end_time,
-                            cs.capacity,
-                            COUNT(ce.id) AS enrolled_count
-
-                            FROM class_sessions cs
-                            JOIN classes c ON cs.class_id = c.id
-                            LEFT JOIN class_enrollments ce ON cs.id = ce.class_session_id
-                            $searchCondition
-                            GROUP BY cs.id, c.name, c.description, cs.session_date, cs.start_time, cs.end_time, cs.capacity
-                            $availabilityCondition
-                            ORDER BY cs.session_date $sortOrder, cs.start_time $sortOrder";
-
-                    $result = $conn->query($sql);
-
+                    // Check if there are any classes available
                     if ($result->num_rows > 0) {
-
-                        echo '<div class="row justify-content-evenly mt-2 g-4">';
-
                         while ($row = $result->fetch_assoc()) {
+                            echo '<div class="col-md-4">';
+                            echo '<div class="card bg-tertiary bg-gradient text-light">';
+                            echo '<div class="card-header bg-dark bg-gradient border-0">';
+                            echo '<h5 class="card-title fs-4">' . htmlspecialchars($row['class_name']) . '</h5>';
+                            echo '</div>';
 
-                            echo '<div class="col-3">';
-                            echo '<div class="card h-100 bg-primary text-light p-3 pb-2 shadow-sm">';
-                            echo '<img src="./images/' . htmlspecialchars($row['class_name']) . '.png" class="card-img-top rounded" alt="' . htmlspecialchars($row['class_name']) . '">';
-                            echo '<h5 class="text-white fw-semibold text-start mt-2">' . htmlspecialchars($row['class_name']) . '</h5>';
-                            echo '<p class="fw-light text-secondary">' . htmlspecialchars(date("D, M j, Y - g:i A", strtotime($row['session_date'] . ' ' . $row['start_time']))) . '</p>';
-                            echo '<p class="text-light">' . htmlspecialchars($row['class_description']) . '</p>';
-                            echo '<div class="card-footer d-flex justify-content-between p-0">';
+                            echo '<div class="card-body">';
 
-                            $enrolledCountSql = "SELECT COUNT(*) AS enrolled_count FROM class_enrollments WHERE class_session_id = " . intval($row['session_id']);
-                            $enrolledCountResult = $conn->query($enrolledCountSql);
-                            $enrolledCount = $enrolledCountResult->fetch_assoc()['enrolled_count'];
+                            // Image
 
-                            echo '<p class="text-white fw-lighter fs-6"><i class="bi bi-person-fill"></i> ' . htmlspecialchars($enrolledCount) . '/' . htmlspecialchars($row['capacity']) . '</p>';
-                            echo '<button type="submit" class="col-4 btn btn-secondary">Enroll</button>';
+                            // If the image URL is empty, use a placeholder image
+                            if (empty($row['image_url'])) {
+                                echo '<img src="./public/blackwhite.svg" class="card-img-top my-2 rounded-2 mb-3" style="height:250px; object-fit:cover" alt="Class Image">';
+                            } else {
+                                echo '<img src="' . htmlspecialchars($row['image_url']) . '" class="card-img-top" alt="Class Image">';
+                            }
+
+                            echo '<p class="card-text text-secondary">' . htmlspecialchars($row['description']) . '</p>';
+
+                            echo '<p class="card-text"><i class="bi bi-calendar text-secondary"></i> <span class="text-light"></span>';
+                            echo '<span class="text-light">' . htmlspecialchars(date("F j, Y", strtotime($row['session_date']))) . '</span>';
+                            echo '</p>';
+                            echo '<p class="card-text"><i class="bi bi-clock text-secondary"></i> <span class="text-light"></span>';
+                            echo '<span class="text-light">' . htmlspecialchars(date("g:i A", strtotime($row['start_time']))) . ' - ' . htmlspecialchars(date("g:i A", strtotime($row['end_time']))) . '</span>';
+                            echo '</p>';
+                            echo '<p class="card-text"><i class="bi bi-person text-secondary"></i> <span class="text-light"></span>';
+                            echo '<span class="text-light">' . htmlspecialchars($row['total_enrolled']) . '/' . htmlspecialchars($row['capacity']) . '</span>';
+                            echo '</p>';
+
+
+                            // Enroll Button
+
+                            // If user is not logged in, clicking the button will redirect to the login page
+                            if (!isset($_SESSION['user_id'])) {
+                                echo '<a type="button" href="./auth/login.php" class="btn btn-purple text-light">Enroll</a>';
+                            } else {
+                                echo '<form method="POST" action="./processes/POST/enrollUserSession.php" class="mt-3">';
+                                echo '<input type="hidden" name="user_id" value="' . htmlspecialchars($_SESSION['user_id']) . '">';
+                                echo '<button type="submit" name="session_id" value="' . htmlspecialchars($row['id']) . '"'
+                                    . ' class="btn btn-purple text-light"'
+                                    . ' onclick="return confirm(\'Are you sure you want to enroll in ' . htmlspecialchars($row["class_name"]) . '?\');">';
+                                echo 'Enroll';
+                                echo '</button>';
+                                echo '</form>';
+                            }
+
+
+
                             echo '</div>';
                             echo '</div>';
                             echo '</div>';
                         }
-
-                        echo '</div>';
                     } else {
-                        echo '<p class="text-light">No classes match your search.</p>';
+                        echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert"> ';
+                        echo ' No classes found.';
+                        echo '</div>';
                     }
-                ?>
+                    ?>
 
+                </div>
             </div>
         </div>
     </main>
@@ -196,6 +196,8 @@ if ($conn->connect_error) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>

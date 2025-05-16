@@ -125,7 +125,7 @@ $membership = getMembershipDetails($_SESSION['user_id']);
                     </div>
                     <div class="card-body py-2 px-2 ">
                         <?php if (!empty($upcomingClassesList)): ?>
-                            <ul class="list-group list-group-flush">
+                            <ul class="list-group list-group-flush gap-2">
                                 <?php foreach ($upcomingClassesList as $class): ?>
                                     <li class="list-group-item bg-dark text-light d-flex justify-content-between align-items-center py-3 border-0 rounded-3">
                                         <div class="d-flex align-items-center gap-2">

@@ -17,7 +17,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userId = $_SESSION['user_id'];
     $membershipType = $_POST['membership_type'];
     $startDate = date('Y-m-d');
-    $endDate = date('Y-m-d', strtotime("+1 " . $membershipType));
+
+    // Calculate the new end date based on today's date
+    $endDate = null;
+    switch ($membershipType) {
+        case 'weekly':
+            $endDate = date('Y-m-d', strtotime($startDate . ' + 7 days'));
+            break;
+        case 'monthly':
+            $endDate = date('Y-m-d', strtotime($startDate . ' + 1 month'));
+            break;
+        case 'yearly':
+            $endDate = date('Y-m-d', strtotime($startDate . ' + 1 year'));
+            break;
+    }
+
 
     // Insert membership into the database
     $stmt = $conn->prepare("INSERT INTO memberships (user_id, start_date, end_date, membership_type, status) VALUES (?, ?, ?, ?, 'pending')");
@@ -38,4 +52,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Failed to apply for membership. Please try again.";
     }
 }
-?>

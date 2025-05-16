@@ -18,11 +18,11 @@ $membership = getMembershipDetails($userId);
 // Handle cancel or renew actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['cancel_membership'])) {
-        updateMembershipStatus($membership['id'], 'canceled');
+        updateMembershipStatus($membership['id'], 'canceled', $membership['membership_type']);
         header("Location: membership.php?success=Membership cancelled successfully!");
         exit();
     } elseif (isset($_POST['renew_membership'])) {
-        updateMembershipStatus($membership['id'], 'pending');
+        updateMembershipStatus($membership['id'], 'pending', $membership['membership_type']);
         header("Location: membership.php?success=Membership renewed successfully!");
         exit();
     }
