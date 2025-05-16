@@ -28,7 +28,7 @@ $userId = $_SESSION['user_id'] ?? null;
             <div class="w-25 d-flex  align-items-center gap-3">
 
                 <!-- Logo and Brand Name -->
-                <a class="navbar-brand d-flex align-items-center" href="#">
+                <a class="navbar-brand d-flex align-items-center" href="index.php">
                     <img src="./public/blackwhite.svg" alt="Logo" width="50" height="50" class="me-3 rounded-circle">
                     BeastModeHQ
                 </a>
@@ -53,10 +53,10 @@ $userId = $_SESSION['user_id'] ?? null;
                 <!-- Centered Navigation Links -->
                 <div class="d-flex justify-content-lg-center justify-content-start w-100 ms-0 ms-lg-5 ms-xl-10">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="#hero">Home</a>
-                        <a class="nav-link" href="#features">Features</a>
-                        <a class="nav-link" href="#gallery">Gallery</a>
-                        <a class="nav-link" href="#pricing">Pricing</a>
+                        <a class="nav-link" href="index.php#hero">Home</a>
+                        <a class="nav-link" href="index.php#features">Features</a>
+                        <a class="nav-link" href="index.php#gallery">Gallery</a>
+                        <a class="nav-link" href="index.php#pricing">Pricing</a>
                         <a class="nav-link active" aria-current="page" href="classes.php">Classes</a>
                     </div>
                 </div>
@@ -88,7 +88,7 @@ $userId = $_SESSION['user_id'] ?? null;
 
 
     <!-- main -->
-    <main class="container mt-10">
+    <main class="container my-10">
         <h1 class="mb-4">All Classes</h1>
 
         <div class="row">
@@ -141,9 +141,9 @@ $userId = $_SESSION['user_id'] ?? null;
 
                             // If the image URL is empty, use a placeholder image
                             if (empty($row['image_url'])) {
-                                echo '<img src="./public/blackwhite.svg" class="card-img-top my-2 rounded-2 mb-3" style="height:250px; object-fit:cover" alt="Class Image">';
+                                echo '<img src="./public/blackwhite.svg" class="card-img-top rounded-2 mb-3" style="height:250px; object-fit:cover" alt="Class Image">';
                             } else {
-                                echo '<img src="' . htmlspecialchars($row['image_url']) . '" class="card-img-top" alt="Class Image">';
+                                echo '<img src="' . htmlspecialchars($row['image_url']) . '" class="card-img-top rounded-2 mb-3" style="height:250px; object-fit:cover" alt="Class Image">';
                             }
 
                             echo '<p class="card-text text-secondary">' . htmlspecialchars($row['description']) . '</p>';

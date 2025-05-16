@@ -170,7 +170,7 @@ $classSessions = getUserClasses($userId);
             </div>
         <?php else: ?>
             <div class="alert alert-warning text-center" role="alert">
-                You are not enrolled in any upcoming classes. <a href="./enroll.php" class="alert-link">Enroll now</a>.
+                You are not enrolled in any upcoming classes. <a href="../classes.php" class="alert-link">Enroll now</a>.
             </div>
         <?php endif; ?>
     </main>

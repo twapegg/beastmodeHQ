@@ -1,6 +1,7 @@
 <?php
 
-function getEnrolledUsers($session_id) {
+function getEnrolledUsers($session_id)
+{
     // Database connection
     $servername = "localhost";
     $username = "root";
@@ -16,15 +17,20 @@ function getEnrolledUsers($session_id) {
 
     // Fetch enrolled users for a specific session
     $query = "SELECT 
-                class_enrollments.id AS enrollment_id, 
-                users.id AS user_id, 
-                users.name AS user_name, 
-                users.email AS user_email, 
-                class_enrollments.status, 
-                class_enrollments.enrolled_at
-              FROM class_enrollments
-              INNER JOIN users ON class_enrollments.user_id = users.id
-              WHERE class_enrollments.class_session_id = ?";
+        class_enrollments.id AS enrollment_id, 
+        users.id AS user_id, 
+        users.name AS user_name, 
+        users.email AS user_email, 
+        class_enrollments.status, 
+        class_enrollments.enrolled_at,
+        attendance.status AS attendance_status,
+        attendance.attendance_time
+    FROM class_enrollments
+    INNER JOIN users ON class_enrollments.user_id = users.id
+    LEFT JOIN attendance ON attendance.user_id = users.id 
+        AND attendance.class_session_id = class_enrollments.class_session_id
+    WHERE class_enrollments.class_session_id = ?
+        AND class_enrollments.status = 'enrolled'";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $session_id);
     $stmt->execute();

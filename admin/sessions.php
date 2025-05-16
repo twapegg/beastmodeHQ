@@ -251,7 +251,7 @@ include "../processes/GET/getEnrolledUsers.php";
                                 echo "</div>";
 
                                 // Offcanvas for Viewing Session Details
-                                echo "<div class='offcanvas offcanvas-end bg-dark text-light' tabindex='-1' id='viewSession" . $row['id'] . "' aria-labelledby='viewSessionLabel" . $row['id'] . "'>";
+                                echo "<div class='offcanvas offcanvas-end bg-dark text-light w-25' tabindex='-1' id='viewSession" . $row['id'] . "' aria-labelledby='viewSessionLabel" . $row['id'] . "'>";
                                 echo "<div class='offcanvas-header bg-primary text-light'>";
                                 echo "<h5 class='offcanvas-title' id='viewSessionLabel" . $row['id'] . "'>Session Details</h5>";
                                 echo "<button type='button' class='btn-close btn-close-white' data-bs-dismiss='offcanvas' aria-label='Close'></button>";
@@ -266,32 +266,49 @@ include "../processes/GET/getEnrolledUsers.php";
                                 echo "<hr>";
                                 echo "<h6>Enrolled Members</h6>";
                                 $enrolledUsers = getEnrolledUsers($row['id']); // Call the function
-                                if (!empty($enrolledUsers)) {
-                                    echo "<div class='list-group'>";
-                                    foreach ($enrolledUsers as $index => $user) {
-                                        // Determine badge color and button text based on status
-                                        $badgeColor = $user['status'] === 'enrolled' ? 'bg-success' : 'bg-danger';
-                                        $badgeText = ucfirst($user['status']); // Capitalize the status text
-                                        $buttonText = $user['status'] === 'enrolled' ? 'Cancel' : 'Re-enroll';
-                                        $buttonClass = $user['status'] === 'enrolled' ? 'btn-danger' : 'btn-light';
-                                        $actionScript = $user['status'] === 'enrolled' ? '../processes/POST/cancelEnrollment.php' : '../processes/POST/reEnrollMember.php';
 
-                                        echo "<div class='list-group-item bg-dark text-light d-flex justify-content-between align-items-center'>";
-                                        echo "<div>";
-                                        echo "<strong>" . ($index + 1) . ". " . htmlspecialchars($user['user_name']) . "</strong><br>";
-                                        echo "<small class='text-secondary'>" . htmlspecialchars($user['user_email']) . "</small>";
-                                        echo "</div>";
-                                        echo "<span class='badge $badgeColor'>$badgeText</span>";
-                                        echo "<form action='$actionScript' method='POST' class='d-inline'>";
-                                        echo "<input type='hidden' name='enrollment_id' value='" . $user['enrollment_id'] . "'>";
-                                        echo "<button type='submit' class='btn btn-sm $buttonClass'>$buttonText</button>";
-                                        echo "</form>";
-                                        echo "</div>";
-                                    }
+
+                                foreach ($enrolledUsers as $index => $user) {
+                                    $badgeColor = $user['status'] === 'enrolled' ? 'bg-success' : 'bg-danger';
+                                    $badgeText = ucfirst($user['status']);
+                                    $buttonText = $user['status'] === 'enrolled' ? 'Cancel' : 'Re-enroll';
+                                    $buttonClass = $user['status'] === 'enrolled' ? 'btn-danger' : 'btn-light';
+                                    $actionScript = $user['status'] === 'enrolled' ? '../processes/POST/cancelEnrollment.php' : '../processes/POST/reEnrollMember.php';
+
+                                    echo "<div class='list-group-item bg-dark text-light d-flex justify-content-between align-items-center'>";
+                                    echo "<div>";
+                                    echo "<strong>" . ($index + 1) . ". " . htmlspecialchars($user['user_name']) . "</strong><br>";
+                                    echo "<small class='text-secondary'>" . htmlspecialchars($user['user_email']) . "</small>";
                                     echo "</div>";
-                                } else {
-                                    echo "<p class='text-secondary'>No members enrolled in this session.</p>";
+                                    echo "<span class='badge $badgeColor'>$badgeText</span>";
+
+                                    // Cancel/Re-enroll button
+                                    echo "<form action='$actionScript' method='POST' class='d-inline me-2'>";
+                                    echo "<input type='hidden' name='enrollment_id' value='" . $user['enrollment_id'] . "'>";
+                                    echo "<button type='submit' class='btn btn-sm $buttonClass'>$buttonText</button>";
+                                    echo "</form>";
+
+                                    // attendance form
+                                    if ($user['attendance_status']) {
+                                        echo "<span class='badge bg-info text-dark me-2'>Marked: " . ucfirst($user['attendance_status']) . "</span>";
+                                    } else {
+                                        echo "<form action='../processes/POST/markAttendance.php' method='POST' class='d-inline'>";
+                                        echo "<input type='hidden' name='user_id' value='" . $user['user_id'] . "'>";
+                                        echo "<input type='hidden' name='class_session_id' value='" . $row['id'] . "'>";
+                                        echo "<select name='status' class='form-select form-select-sm d-inline w-auto me-1 text-light'>";
+                                        echo "<option value='present'>Present</option>";
+                                        echo "<option value='late'>Late</option>";
+                                        echo "<option value='absent'>Absent</option>";
+                                        echo "</select>";
+                                        echo "<button type='submit' class='btn btn-sm btn-secondary text-light'>Mark</button>";
+                                        echo "</form>";
+                                    }
+
+                                    echo "</div>";
                                 }
+
+
+
                                 echo "</div>";
                                 echo "</div>";
                             }

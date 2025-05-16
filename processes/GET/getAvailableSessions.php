@@ -45,7 +45,7 @@ if ($userId) {
     $params[] = &$userId;
 }
 
-$baseQuery .= " GROUP BY cs.id ORDER BY cs.session_date DESC";
+$baseQuery .= " GROUP BY cs.id ORDER BY cs.session_date ASC";
 
 $stmt = $conn->prepare($baseQuery);
 
